@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cryptocoop Landing Page
+
+A stunning one-page website built with Next.js 14, showcasing the Cryptocoop Telegram Mini App - a truly free crypto exchange platform.
+
+## Features
+
+- 🎨 **Dark, Modern Design** - Minimalist black and white theme with cyan accents
+- ✨ **Stunning Animations** - LaserFlow effects, ASCII text animations, and smooth scroll animations
+- 📱 **Fully Responsive** - Optimized for desktop, tablet, and mobile devices
+- ⚡ **Performance Optimized** - Lazy-loaded Three.js components and optimized rendering
+- 🎭 **Interactive Elements** - Parallax effects, hover states, and animated counters
+
+## Tech Stack
+
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS v4** - Utility-first styling
+- **shadcn/ui** - Beautiful, accessible UI components
+- **Framer Motion** - Smooth animations and transitions
+- **Three.js** - 3D graphics for LaserFlow and ASCII effects
 
 ## Getting Started
 
-First, run the development server:
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── layout.tsx          # Root layout with metadata
+├── page.tsx           # Main landing page
+├── globals.css        # Global styles
+└── loading.tsx        # Loading state
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+components/
+├── sections/          # Page sections
+│   ├── Hero.tsx       # Hero with LaserFlow & ASCII
+│   ├── Stats.tsx      # Statistics with animated counters
+│   ├── AppShowcase.tsx # iPhone mockup showcase
+│   ├── Features.tsx   # Feature grid
+│   ├── Trust.tsx      # Credibility section
+│   └── CTA.tsx        # Call-to-action & footer
+├── ui/                # UI components
+│   ├── LaserFlow.tsx  # 3D laser effect
+│   ├── ASCIIText.tsx  # ASCII text animation
+│   └── button.tsx     # Button component
+└── AnimatedSection.tsx # Scroll animation wrapper
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+public/assets/         # Images and assets
+```
 
-## Deploy on Vercel
+## Customization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Update Telegram Link
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Edit the CTA link in `components/sections/CTA.tsx`:
+
+```tsx
+<a href="https://t.me/YOUR_BOT_USERNAME" target="_blank" rel="noopener noreferrer">
+```
+
+### Add Your Assets
+
+Place your assets in the `public/assets/` folder:
+- Logo: `public/logo.svg` or `public/logo.png`
+- App screenshots: `public/assets/app-screen-*.png`
+- iPhone mockup: `public/assets/iphone-mockup.png`
+
+### Customize Colors
+
+The color scheme is defined in `app/globals.css` under the `.dark` class:
+- Background: Pure black (`oklch(0 0 0)`)
+- Foreground: White (`oklch(1 0 0)`)
+- Primary/Accent: Cyan (`oklch(0.75 0.15 195)`)
+
+### Modify Stats
+
+Update the stats in `components/sections/Stats.tsx`:
+
+```tsx
+<AnimatedNumber value={28000} suffix="+" />
+```
+
+## Performance Tips
+
+1. **Three.js Components** are already lazy-loaded with `dynamic()` imports
+2. **Images** should be optimized as WebP format
+3. **Fonts** are loaded with `display: 'swap'` for better performance
+4. **Animations** use GPU-accelerated transforms
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## License
+
+© 2024 Cryptocoop. All rights reserved.
+
+## Support
+
+For questions or support, contact us through Telegram or visit our website.
