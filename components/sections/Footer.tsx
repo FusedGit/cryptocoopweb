@@ -3,81 +3,87 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Send, Twitter, Linkedin, Github } from 'lucide-react';
-import AnimatedSection from '@/components/AnimatedSection';
+import { Twitter, Linkedin } from 'lucide-react';
 
 const footerLinks: { title: string; links: { name: string; href: string }[] }[] = [
   {
     title: 'Resources',
     links: [
-      { name: 'Press', href: '#' },
-      { name: 'Roadmap', href: '#' },
-    ]
-  },
-  {
-    title: 'Legal',
-    links: [
-      { name: 'Law Enforcement', href: '#' },
+      { name: 'Support', href: '/support' },
+      { name: 'Affiliates', href: '/affiliates' },
+      { name: 'Press', href: '/press' },
     ]
   },
   {
     title: 'Status',
     links: [
-      { name: 'Wallet Status', href: '#' },
+      { name: 'Wallet Status', href: 'https://cryptocoop.betteruptime.com/' },
+      { name: 'Supported Countries', href: '/supported' },
+    ]
+  },
+  {
+    title: 'Company',
+    links: [
+      { name: 'About', href: '/about' },
+      { name: 'Business Solutions', href: '/business' },
+      { name: 'Investors', href: '/investors' },
     ]
   }
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-white to-cyan-50 pt-20 pb-10 relative overflow-hidden">
-      {/* Doodle decorations */}
-      <div className="absolute top-10 right-10 w-32 h-32 border-4 border-cyan-300 opacity-20" 
-           style={{ borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%' }} />
-      <motion.div 
-        className="absolute bottom-20 left-10 text-3xl"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      >
-        💎
-      </motion.div>
-
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+    <footer className="bg-background border-t border-border pt-20 pb-10 relative overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-black flex items-center justify-center text-white p-2 overflow-hidden"
-                   style={{ borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%', border: '3px solid black' }}>
+            <Link href="/" className="flex items-center gap-2.5 mb-6">
+              <div className="w-8 h-8 bg-foreground rounded flex items-center justify-center overflow-hidden">
                 <Image 
                   src="/Logo.svg" 
-                  alt="Cryptocoop Logo" 
-                  width={24} 
-                  height={24} 
+                  alt="Cryptocoop" 
+                  width={20} 
+                  height={20} 
                   className="invert"
                 />
               </div>
-              <span className="text-xl font-black text-foreground doodle-text">Cryptocoop</span>
+              <span className="text-lg font-medium text-foreground professional-text tracking-tight">
+                Cryptocoop
+              </span>
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-8 doodle-text font-semibold">
-              TG Wallet Inc. operates the Cryptocoop Exchange mini app. We are committed to financial privacy, zero-KYC trading, and unrestricted global access. 🚀
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs mb-6 professional-text">
+              Cryptocoop is a global cryptocurrency exchange committed to financial privacy and secure digital asset trading.
             </p>
-            <div className="flex gap-4">
-              <motion.div whileHover={{ scale: 1.1, rotate: 5 }}>
-                <Link href="#" className="w-12 h-12 bg-cyan-100 flex items-center justify-center text-cyan-600 hover:bg-cyan-200 transition-colors"
-                      style={{ borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%', border: '3px solid #22d3ee' }}>
-                  <Twitter className="w-5 h-5" />
+            
+            {/* QR Code */}
+            <div className="mb-6">
+              <p className="text-xs text-muted-foreground professional-text mb-3">Scan to open exchange</p>
+              <div className="inline-block bg-white p-2 rounded-lg border border-border refined-shadow">
+                <Image 
+                  src="/qrapp.png" 
+                  alt="Scan to open Cryptocoop" 
+                  width={120} 
+                  height={120} 
+                  className="rounded-md"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href="#" 
+                  className="w-10 h-10 bg-accent/50 rounded flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-accent transition-colors"
+                >
+                  <Twitter className="w-4 h-4" strokeWidth={1.5} />
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.1, rotate: -5 }}>
-                <Link href="#" className="w-12 h-12 bg-cyan-100 flex items-center justify-center text-cyan-600 hover:bg-cyan-200 transition-colors"
-                      style={{ borderRadius: '50% 40% 60% 50% / 40% 50% 50% 60%', border: '3px solid #22d3ee' }}>
-                  <Linkedin className="w-5 h-5" />
-                </Link>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.1, rotate: 5 }}>
-                <Link href="#" className="w-12 h-12 bg-cyan-100 flex items-center justify-center text-cyan-600 hover:bg-cyan-200 transition-colors"
-                      style={{ borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%', border: '3px solid #22d3ee' }}>
-                  <Github className="w-5 h-5" />
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  href="#" 
+                  className="w-10 h-10 bg-accent/50 rounded flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-accent transition-colors"
+                >
+                  <Linkedin className="w-4 h-4" strokeWidth={1.5} />
                 </Link>
               </motion.div>
             </div>
@@ -85,11 +91,16 @@ export default function Footer() {
 
           {footerLinks.map((column) => (
             <div key={column.title}>
-              <h4 className="font-black text-foreground mb-6 text-sm doodle-text">{column.title}</h4>
+              <h4 className="font-medium text-foreground mb-5 text-sm professional-text">
+                {column.title}
+              </h4>
               <ul className="space-y-3">
                 {column.links.map((link) => (
                   <li key={link.name}>
-                    <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors doodle-text font-semibold">
+                    <Link 
+                      href={link.href} 
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors professional-text"
+                    >
                       {link.name}
                     </Link>
                   </li>
@@ -99,11 +110,15 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground doodle-text font-bold">
-          <div>© 2025 Cryptocoop. All rights reserved. Made with ❤️</div>
+        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground professional-text">
+          <div>© 2026 Cryptocoop. All rights reserved.</div>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-primary transition-colors">Terms of Use</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>

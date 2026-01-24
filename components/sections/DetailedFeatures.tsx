@@ -1,135 +1,108 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send, RefreshCw, Globe, Coins, ShieldCheck, Heart, Headphones, TrendingUp, Shield, Zap } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
 
-const doodleFeatures = [
+const features = [
   {
-    title: 'Privacy First',
-    subtitle: 'Trade anonymously.',
-    description: 'No KYC, no ID verification, no personal data collection. Your privacy is our absolute priority.',
+    title: 'Privacy-first architecture',
+    subtitle: 'Designed for discretion',
+    description: 'Built on principles of financial privacy. No identity verification or personal data collection required.',
     image: '/assets/camera.png',
-    color: 'bg-orange-100',
-    borderColor: 'border-orange-400',
-    textColor: 'text-orange-900'
+    bg: 'bg-gradient-to-br from-accent/30 to-accent/10',
   },
   {
-    title: 'Zero Limits',
-    subtitle: 'No caps. No restrictions.',
-    description: 'Trade any amount, anytime.',
+    title: 'Unrestricted trading',
+    subtitle: 'No artificial limits',
+    description: 'Trade without caps or restrictions. Full access to markets regardless of volume.',
     image: '/assets/nolimits.png',
-    color: 'bg-green-100',
-    borderColor: 'border-green-400',
-    textColor: 'text-green-900'
+    bg: 'bg-gradient-to-br from-primary/10 to-primary/5',
   },
   {
-    title: 'Global Payments',
-    subtitle: 'Buy and sell using bank transfers,',
-    description: 'cash, and digital payments worldwide.',
+    title: 'Global payment support',
+    subtitle: 'Connect anywhere',
+    description: 'Bank transfers, cash, and digital payment systems accepted worldwide.',
     image: '/assets/globalpayments.png',
-    color: 'bg-blue-100',
-    borderColor: 'border-blue-400',
-    textColor: 'text-blue-900'
+    bg: 'bg-gradient-to-br from-muted to-background',
   },
   {
-    title: '24/7 Human Support',
-    subtitle: 'Real people, real help.',
-    description: 'Available around the clock for your private trades.',
+    title: 'Dedicated support',
+    subtitle: 'Always available',
+    description: 'Real human support, available around the clock for assistance with your trades.',
     image: '/assets/human.png',
-    color: 'bg-purple-100',
-    borderColor: 'border-purple-400',
-    textColor: 'text-purple-900'
+    bg: 'bg-gradient-to-br from-accent/20 to-accent/5',
   },
 ];
 
-
 export default function DetailedFeatures() {
   return (
-    <section className="py-20 md:py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 max-w-[1400px]">
-        {/* Doodle Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10 max-w-6xl mx-auto">
-          {doodleFeatures.map((feature, idx) => (
+    <section className="py-32 bg-background overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-8 max-w-7xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+          {features.map((feature, idx) => (
             <AnimatedSection key={idx}>
               <motion.div
-                whileHover={{ y: -5, rotate: idx % 2 === 0 ? 1 : -1 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className={`relative h-full ${feature.color} ${feature.borderColor} border-4 rounded-3xl p-10 md:p-12 flex flex-col min-h-[450px] md:min-h-[500px] sketchy-shadow`}
-                style={{ 
-                  transform: `rotate(${idx % 2 === 0 ? -0.5 : 0.5}deg)`,
-                }}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                className={`relative h-full ${feature.bg} border border-border rounded-2xl p-10 md:p-12 flex flex-col min-h-[480px] refined-shadow`}
               >
-                {/* Content */}
                 <div className="relative z-10 flex-1 flex flex-col">
-                  <h3 className={`text-3xl md:text-4xl lg:text-5xl font-black ${feature.textColor} mb-3 md:mb-4 doodle-text leading-tight`}>
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl text-foreground mb-3 heading-text">
                     {feature.title}
                   </h3>
-                  <p className={`text-base md:text-lg ${feature.textColor} opacity-80 mb-2 doodle-text font-semibold`}>
+                  <p className="text-base md:text-lg text-muted-foreground mb-2 professional-text">
                     {feature.subtitle}
                   </p>
-                  <p className={`text-sm md:text-base ${feature.textColor} opacity-70 doodle-text`}>
+                  <p className="text-sm md:text-base text-muted-foreground/80 professional-text leading-relaxed">
                     {feature.description}
                   </p>
                   
                   {/* Image positioned at bottom */}
-                  <div className="mt-auto pt-6 md:pt-8 flex justify-center items-end">
+                  <div className="mt-auto pt-8 flex justify-center items-end">
                     <motion.div
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                       className="relative"
+                      style={{ 
+                        filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.08))',
+                      }}
                     >
                       <Image
                         src={feature.image}
                         alt={feature.title}
-                        width={300}
-                        height={300}
+                        width={280}
+                        height={280}
                         unoptimized
-                        className="w-full max-w-[200px] md:max-w-[280px] lg:max-w-[320px] h-auto transparent-png"
-                        style={{ 
-                          filter: 'drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.1))',
-                        }}
+                        className="w-full max-w-[200px] md:max-w-[260px] h-auto transparent-png"
                       />
                     </motion.div>
                   </div>
                 </div>
-
-                {/* Doodle star decorations */}
-                <motion.div 
-                  className="absolute top-6 right-6 text-2xl"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                >
-                  ⭐
-                </motion.div>
               </motion.div>
             </AnimatedSection>
           ))}
         </div>
 
-        {/* Bottom CTA Doodle - Unique shape 1 */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 md:mt-20 text-center"
+          className="mt-20 text-center"
         >
-          <div className="inline-block relative">
-            <motion.a
-              href="https://t.me/TheCryptoCoopBot"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              className="relative bg-primary text-white px-8 py-4 md:px-10 md:py-5 font-black text-lg md:text-xl doodle-text sketchy-shadow cursor-pointer inline-block"
-              style={{
-                borderRadius: '45% 55% 60% 40% / 35% 45% 55% 65%',
-                border: '3px solid black',
-              }}
-            >
-              Open Exchange in Telegram →
-            </motion.a>
-          </div>
+          <motion.a
+            href="https://t.me/TheCryptoCoopBot"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="bg-foreground text-background px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center gap-2 transition-opacity hover:opacity-90 elevated-shadow"
+          >
+            Open Exchange
+            <ArrowRight className="w-4 h-4" />
+          </motion.a>
         </motion.div>
       </div>
     </section>

@@ -2,29 +2,29 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus, ChevronRight } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const faqs = [
   {
-    question: 'What is Cryptocoop and how is it different?',
-    answer: 'Cryptocoop is a privacy-first crypto exchange natively embedded into Telegram. Unlike other exchanges, we require zero KYC, have no limits, and never perform intrusive funds checks or account freezes.',
+    question: 'What makes Cryptocoop different from other exchanges?',
+    answer: 'Cryptocoop is built directly into Telegram with privacy as a foundational principle. We operate without identity verification requirements and maintain a non-custodial architecture that gives you complete control over your assets.',
   },
   {
-    question: 'Do I need to verify my identity (KYC)?',
-    answer: 'No. We believe in financial sovereignty and privacy. You can trade any amount without ever sharing personal documents or identity verification.',
+    question: 'Is identity verification required?',
+    answer: 'No identity verification is needed. We prioritize financial privacy and believe users should maintain control over their personal information while accessing digital asset markets.',
   },
   {
-    question: 'What tokens can I trade?',
-    answer: 'We support all popular cryptocurrencies including BTC, ETH, TON, and USDT. We are a premier destination for Monero (XMR) trading, offering the best rates and instant liquidity.',
+    question: 'Which digital assets are supported?',
+    answer: 'We support a curated selection of major cryptocurrencies including BTC, ETH, TON, and USDT. Our platform specializes in privacy-focused assets like Monero (XMR) with competitive rates and reliable liquidity.',
   },
   {
-    question: 'Are there any limits on trading or transfers?',
-    answer: 'None. Whether you are a small trader or a high-volume institution, we provide an unrestricted environment with zero daily or monthly caps.',
+    question: 'Are there trading limits or restrictions?',
+    answer: 'There are no imposed trading caps or volume restrictions. Our platform is designed to serve both individual traders and institutional users without artificial limitations.',
   },
   {
-    question: 'How do you ensure security without KYC?',
-    answer: "Security is handled through Telegram's native encryption, multi-factor authentication, and our own proprietary stealth trading technology. We don't need your data to keep your funds safe.",
+    question: 'How is security maintained?',
+    answer: "Security is ensured through Telegram's native encryption infrastructure, combined with multi-factor authentication and our proprietary security protocols. Your assets remain secure without requiring personal data collection.",
   },
 ];
 
@@ -32,53 +32,41 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-yellow-50 via-white to-white relative overflow-hidden">
-      {/* Doodle decorations */}
-      <div className="absolute top-20 left-10 w-24 h-24 border-4 border-yellow-300 opacity-30" 
-           style={{ borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%' }} />
-      <motion.div 
-        className="absolute bottom-20 right-20 text-4xl"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      >
-        ❓
-      </motion.div>
-
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section className="py-32 bg-white relative overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
         <AnimatedSection>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-8 text-center doodle-text"
-              style={{ transform: 'rotate(-1deg)' }}>
-            Got Questions?
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 text-center heading-text">
+            Frequently asked questions
           </h2>
-          <p className="text-xl text-muted-foreground text-center mb-16 doodle-text font-semibold">
-            We've got answers! 💡
+          <p className="text-lg text-muted-foreground text-center mb-16 professional-text">
+            Everything you need to know about our platform
           </p>
         </AnimatedSection>
 
-        <div className="space-y-5">
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
             <AnimatedSection key={index}>
               <motion.div 
-                className="border-4 border-yellow-200 rounded-3xl overflow-hidden bg-white hover:border-yellow-400 transition-colors sketchy-shadow"
-                style={{ transform: `rotate(${index % 2 === 0 ? -0.3 : 0.3}deg)` }}
-                whileHover={{ rotate: index % 2 === 0 ? 0.5 : -0.5 }}
+                className="border border-border rounded-lg overflow-hidden bg-card hover:border-foreground/20 transition-colors"
+                whileHover={{ y: -2 }}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center justify-between p-6 md:p-8 text-left"
+                  className="w-full flex items-center justify-between p-6 md:p-7 text-left gap-4"
                 >
-                  <span className="text-lg md:text-xl font-black text-foreground pr-8 doodle-text">
+                  <span className="text-base md:text-lg text-foreground professional-text font-medium flex-1">
                     {faq.question}
                   </span>
                   <motion.div 
-                    className={`flex-shrink-0 w-10 h-10 flex items-center justify-center font-black text-lg transition-all ${openIndex === index ? 'bg-primary text-white' : 'bg-yellow-100 text-yellow-900'}`}
-                    style={{ 
-                      borderRadius: '40% 60% 50% 50% / 60% 40% 60% 40%', 
-                      border: openIndex === index ? '3px solid black' : '3px solid #facc15' 
-                    }}
+                    className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center text-foreground"
                     animate={{ rotate: openIndex === index ? 180 : 0 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {openIndex === index ? '−' : '+'}
+                    {openIndex === index ? (
+                      <Minus className="w-4 h-4" strokeWidth={2} />
+                    ) : (
+                      <Plus className="w-4 h-4" strokeWidth={2} />
+                    )}
                   </motion.div>
                 </button>
                 <AnimatePresence>
@@ -87,9 +75,9 @@ export default function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <div className="px-6 md:px-8 pb-8 text-base md:text-lg text-muted-foreground leading-relaxed doodle-text font-semibold">
+                      <div className="px-6 md:px-7 pb-7 text-[15px] md:text-base text-muted-foreground leading-relaxed professional-text">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -102,15 +90,21 @@ export default function FAQ() {
 
         <AnimatedSection>
           <div className="mt-16 text-center">
+            <p className="text-muted-foreground professional-text mb-4">
+              Have more questions?
+            </p>
             <motion.a 
               href="https://t.me/TheCryptoCoopBot"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.05, rotate: 2 }}
-              className="inline-flex items-center gap-2 bg-yellow-100 text-yellow-900 px-8 py-4 font-black text-lg doodle-text sketchy-shadow"
-              style={{ borderRadius: '60% 40% 55% 45% / 45% 55% 45% 55%', border: '3px solid #facc15' }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors professional-text font-medium"
             >
-              Still have questions? Ask us! →
+              Contact our support team
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </motion.a>
           </div>
         </AnimatedSection>
