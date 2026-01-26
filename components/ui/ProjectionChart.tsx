@@ -14,7 +14,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="bg-card border border-border rounded-lg p-4 shadow-lg">
+      <div className="bg-card border border-border rounded-lg p-4">
         <p className="text-sm text-foreground professional-text font-medium mb-2">{label.replace('\n', ' ')}</p>
         <p className="text-sm text-muted-foreground professional-text">
           Investment: <span className="font-medium text-foreground">${data.investment}K</span>

@@ -31,7 +31,7 @@ export default function CTA() {
               >
                 <Button
                   size="lg"
-                  className="group gap-2 bg-primary px-8 py-6 text-lg font-semibold text-black transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/50"
+                  className="group gap-2 bg-primary px-8 py-6 text-lg font-semibold text-black transition-all hover:bg-primary/90"
                   asChild
                 >
                   <a href="https://t.me/cryptocoop" target="_blank" rel="noopener noreferrer">

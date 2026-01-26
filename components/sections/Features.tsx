@@ -61,7 +61,7 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-              className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10"
+              className="group relative overflow-hidden rounded-lg border border-border bg-card p-6 transition-all hover:border-primary/50"
             >
               <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
                 <feature.icon className="h-6 w-6 text-primary" />

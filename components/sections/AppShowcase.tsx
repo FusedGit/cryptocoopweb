@@ -29,7 +29,7 @@ export default function AppShowcase() {
           <AnimatedSection className="order-2 md:order-1">
             <motion.div
               style={{ y }}
-              className="relative mx-auto flex aspect-[9/19.5] w-full max-w-[300px] items-center justify-center rounded-[3rem] border-8 border-zinc-800 bg-zinc-900 p-2 shadow-2xl md:max-w-[350px]"
+              className="relative mx-auto flex aspect-[9/19.5] w-full max-w-[300px] items-center justify-center rounded-[3rem] border-8 border-zinc-800 bg-zinc-900 p-2 md:max-w-[350px]"
             >
               {/* Screen Content */}
               <div className="relative h-full w-full overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-zinc-900 to-black">
