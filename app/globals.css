@@ -123,6 +123,30 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* Hide scrollbars */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  /* Hide Next.js default loading indicator */
+  #nprogress,
+  .nprogress-custom-parent,
+  [data-nextjs-scroll-focus-boundary],
+  .next-loading-indicator,
+  [data-nextjs-router] {
+    display: none !important;
+  }
+  
+  /* Hide Turbopack loading spinner */
+  [class*="__turbopack__"][class*="loading"],
+  [id*="turbopack-loading"] {
+    display: none !important;
+  }
 }
 
 @keyframes fade-up {

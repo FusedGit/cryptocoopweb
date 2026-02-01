@@ -19,7 +19,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { FileText, DollarSign, Search, Filter, X } from 'lucide-react'
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+  ContextMenuSeparator,
+} from '@/components/ui/context-menu'
+import { FileText, DollarSign, Search, Filter, X, Edit, Eye, Trash2, FileDown } from 'lucide-react'
 import { EditInvestmentDialog } from './edit-investment-dialog'
 
 interface Investment {
@@ -173,13 +180,12 @@ export function InvestmentsTableWithFilters({ investments }: { investments: Inve
               <TableHead>Earnings</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Contract</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredInvestments.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={8} className="h-24 text-center text-muted-foreground">
+                <TableCell colSpan={7} className="h-24 text-center text-muted-foreground">
                   {searchTerm || statusFilter !== 'all' || paymentStatusFilter !== 'all'
                     ? 'No investments match your filters'
                     : 'No investments found'}
@@ -197,7 +203,9 @@ export function InvestmentsTableWithFilters({ investments }: { investments: Inve
                 )
 
                 return (
-                  <TableRow key={investment.id}>
+                  <ContextMenu key={investment.id}>
+                    <ContextMenuTrigger asChild>
+                      <TableRow className="cursor-context-menu hover:bg-muted/50">
                     <TableCell>
                       <div>
                         <p className="font-medium">
@@ -273,16 +281,28 @@ export function InvestmentsTableWithFilters({ investments }: { investments: Inve
                         <span className="text-muted-foreground text-sm">-</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-right">
-                      <Button 
-                        size="sm" 
-                        variant="outline"
-                        onClick={() => setEditingInvestment(investment)}
-                      >
-                        Edit
-                      </Button>
-                    </TableCell>
                   </TableRow>
+                    </ContextMenuTrigger>
+                    <ContextMenuContent className="w-48">
+                      <ContextMenuItem onClick={() => setEditingInvestment(investment)}>
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit Investment
+                      </ContextMenuItem>
+                      {investment.contract_url && (
+                        <ContextMenuItem asChild>
+                          <a href={investment.contract_url} target="_blank" rel="noopener noreferrer">
+                            <FileDown className="h-4 w-4 mr-2" />
+                            Download Contract
+                          </a>
+                        </ContextMenuItem>
+                      )}
+                      <ContextMenuSeparator />
+                      <ContextMenuItem className="text-red-600 dark:text-red-400">
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Investment
+                      </ContextMenuItem>
+                    </ContextMenuContent>
+                  </ContextMenu>
                 )
               })
             )}

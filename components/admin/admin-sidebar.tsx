@@ -11,10 +11,19 @@ import {
   Shield,
   LifeBuoy,
   History,
+  Wallet,
+  ArrowLeftRight,
+  AlertCircle,
+  PieChart,
+  BarChart3,
+  TrendingDown,
+  Lock,
+  Activity,
 } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
-import { NavMain } from "@/components/nav-main"
+import { NavMainGrouped } from "@/components/nav-main-grouped"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
 import {
@@ -41,6 +50,8 @@ export function AdminSidebar({ user, role, ...props }: React.ComponentProps<type
         icon: LayoutDashboard,
         isActive: true,
       },
+    ],
+    investorManagement: [
       {
         title: "Investors (CRM)",
         url: "/admin/investors",
@@ -61,11 +72,57 @@ export function AdminSidebar({ user, role, ...props }: React.ComponentProps<type
         url: "/admin/documents",
         icon: FileText,
       },
+    ],
+    businessOps: [
+      {
+        title: "Liquidity Pools",
+        url: "/admin/liquidity",
+        icon: Wallet,
+      },
+      {
+        title: "Exchange Trades",
+        url: "/admin/trades",
+        icon: ArrowLeftRight,
+      },
+      {
+        title: "Profit & Loss",
+        url: "/admin/pnl",
+        icon: BarChart3,
+      },
+      {
+        title: "Frozen Funds",
+        url: "/admin/frozen",
+        icon: Lock,
+      },
+      {
+        title: "Risk Analytics",
+        url: "/admin/risk",
+        icon: AlertCircle,
+      },
+    ],
+    compliance: [
+      {
+        title: "Fund Movements",
+        url: "/admin/fund-tracking",
+        icon: Activity,
+      },
+      {
+        title: "Wallet Addresses",
+        url: "/admin/wallets",
+        icon: Wallet,
+      },
+      {
+        title: "Transparency Reports",
+        url: "/admin/transparency",
+        icon: FileText,
+      },
       {
         title: "Audit Logs",
         url: "/admin/audit",
         icon: History,
       },
+    ],
+    admin: [
       ...(role === 'super_admin' ? [{
         title: "Admin Users",
         url: "/admin/users",
@@ -92,21 +149,25 @@ export function AdminSidebar({ user, role, ...props }: React.ComponentProps<type
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/admin">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-red-600">
-                  <Shield className="size-4 text-white" />
+              <Link href="/admin">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-foreground">
+                  <Image src="/Logo.svg" alt="CryptoCoop" width={18} height={18} className="invert dark:invert-0" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Admin Panel</span>
-                  <span className="truncate text-xs capitalize">{role.replace('_', ' ')}</span>
+                  <span className="truncate font-semibold">CryptoCoop</span>
+                  <span className="truncate text-xs text-muted-foreground">Admin Panel</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMainGrouped title="Dashboard" items={data.navMain} />
+        <NavMainGrouped title="Investor Management" items={data.investorManagement} />
+        <NavMainGrouped title="Business Operations" items={data.businessOps} />
+        <NavMainGrouped title="Compliance & Tracking" items={data.compliance} />
+        {data.admin.length > 0 && <NavMainGrouped title="Administration" items={data.admin} />}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

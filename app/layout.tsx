@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { ThemeProvider } from '@/components/theme-provider'
+import { SonnerToaster } from '@/components/sonner-toaster'
 
 export default function RootLayout({
   children,
@@ -46,18 +46,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexMono.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
+        <SonnerToaster />
       </body>
     </html>
   );

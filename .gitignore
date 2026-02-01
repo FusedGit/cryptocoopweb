@@ -43,4 +43,5 @@ next-env.d.ts
 # markdown files
 *.md
 
-
+# SQL files
+*.sql

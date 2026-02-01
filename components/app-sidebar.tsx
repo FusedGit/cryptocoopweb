@@ -12,6 +12,7 @@ import {
   Mail,
 } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
@@ -86,7 +87,7 @@ export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sideb
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/dashboard">
+              <Link href="/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-foreground">
                   <Image src="/Logo.svg" alt="CryptoCoop" width={18} height={18} className="invert dark:invert-0" />
                 </div>
@@ -94,7 +95,7 @@ export function AppSidebar({ user, ...props }: React.ComponentProps<typeof Sideb
                   <span className="truncate font-semibold">CryptoCoop</span>
                   <span className="truncate text-xs">Investor Portal</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

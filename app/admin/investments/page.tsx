@@ -1,7 +1,34 @@
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CreateInvestmentDialog } from '@/components/admin/create-investment-dialog'
 import { InvestmentsTableWithFilters } from '@/components/admin/investments-table-with-filters'
+import { PageHeader } from '@/components/admin/page-header'
+import { Skeleton } from '@/components/ui/skeleton'
+import { getInvestments } from '@/lib/queries'
+
+async function InvestmentsData() {
+  // Use cached query
+  const investments = await getInvestments()
+  return <InvestmentsTableWithFilters investments={investments} />
+}
+
+async function InvestmentsHeader() {
+  const supabase = await createClient()
+  
+  const { data: investors } = await supabase
+    .from('investors')
+    .select('id, full_name, email')
+    .order('full_name')
+  
+  return (
+    <PageHeader
+      title="Investment Management"
+      description="Create and manage investment contracts with payment tracking"
+      action={<CreateInvestmentDialog investors={investors || []} />}
+    />
+  )
+}
 
 export default async function AdminInvestments() {
   const supabase = await createClient()
@@ -14,16 +41,7 @@ export default async function AdminInvestments() {
     redirect('/login')
   }
 
-  // Get all investments with investor info
-  const { data: investments } = await supabase
-    .from('investments')
-    .select(`
-      *,
-      investor:investors(id, full_name, email)
-    `)
-    .order('created_at', { ascending: false })
-
-  // Get all investors for dropdown
+  // Get investors for the dialog - no Suspense needed
   const { data: investors } = await supabase
     .from('investors')
     .select('id, full_name, email')
@@ -31,19 +49,28 @@ export default async function AdminInvestments() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Investment Management</h1>
-          <p className="text-muted-foreground mt-2">
-            Create and manage investment contracts with payment tracking
-          </p>
-        </div>
-        <CreateInvestmentDialog investors={investors || []} />
-      </div>
+      {/* Static Header - Renders instantly, no skeleton */}
+      <PageHeader
+        title="Investment Management"
+        description="Create and manage investment contracts with payment tracking"
+        action={<CreateInvestmentDialog investors={investors || []} />}
+      />
 
-      {/* Investments Table */}
-      <InvestmentsTableWithFilters investments={investments || []} />
+      {/* Dynamic Table - Only this shows skeleton */}
+      <Suspense fallback={
+        <div className="space-y-4">
+          <div className="flex gap-4">
+            <Skeleton className="h-9 w-[130px]" />
+            <Skeleton className="h-9 w-[160px]" />
+          </div>
+          <Skeleton className="h-4 w-48" />
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="h-16 bg-muted/50 rounded animate-pulse" />
+          ))}
+        </div>
+      }>
+        <InvestmentsData />
+      </Suspense>
     </div>
   )
 }

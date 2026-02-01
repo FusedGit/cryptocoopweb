@@ -21,6 +21,12 @@ const CRYPTO_ID_MAP: Record<string, string> = {
   DOT: 'polkadot',
   MATIC: 'matic-network',
   AVAX: 'avalanche-2',
+  DOGE: 'dogecoin',
+  XRP: 'ripple',
+  SHIB: 'shiba-inu',
+  LINK: 'chainlink',
+  UNI: 'uniswap',
+  DAI: 'dai',
 }
 
 interface PriceResponse {

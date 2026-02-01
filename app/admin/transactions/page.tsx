@@ -1,7 +1,34 @@
+import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CreateTransactionDialog } from '@/components/admin/create-transaction-dialog'
 import { AdminTransactionsTableWithFilters } from '@/components/admin/transactions-table-with-filters'
+import { PageHeader } from '@/components/admin/page-header'
+import { TransactionsTableSkeleton } from '@/components/admin/dashboard-skeleton'
+import { getTransactions } from '@/lib/queries'
+
+async function TransactionsData() {
+  // Use cached query
+  const transactions = await getTransactions()
+  return <AdminTransactionsTableWithFilters transactions={transactions} />
+}
+
+async function TransactionsHeader() {
+  const supabase = await createClient()
+  
+  const { data: investors } = await supabase
+    .from('investors')
+    .select('id, full_name, email')
+    .order('full_name')
+  
+  return (
+    <PageHeader
+      title="Transaction Management"
+      description="Record and manage all investor transactions with receipts"
+      action={<CreateTransactionDialog investors={investors || []} />}
+    />
+  )
+}
 
 export default async function AdminTransactions() {
   const supabase = await createClient()
@@ -14,17 +41,7 @@ export default async function AdminTransactions() {
     redirect('/login')
   }
 
-  // Get all transactions with investor info
-  const { data: transactions } = await supabase
-    .from('transactions')
-    .select(`
-      *,
-      investor:investors(full_name, email),
-      receipts:transaction_receipts(*)
-    `)
-    .order('transaction_date', { ascending: false })
-
-  // Get all investors for dropdown
+  // Get investors for the dialog - no Suspense needed
   const { data: investors } = await supabase
     .from('investors')
     .select('id, full_name, email')
@@ -32,19 +49,17 @@ export default async function AdminTransactions() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Transaction Management</h1>
-          <p className="text-muted-foreground mt-2">
-            Record and manage all investor transactions with receipts
-          </p>
-        </div>
-        <CreateTransactionDialog investors={investors || []} />
-      </div>
+      {/* Static Header - Renders instantly, no skeleton */}
+      <PageHeader
+        title="Transaction Management"
+        description="Record and manage all investor transactions with receipts"
+        action={<CreateTransactionDialog investors={investors || []} />}
+      />
 
-      {/* Transactions Table */}
-      <AdminTransactionsTableWithFilters transactions={transactions || []} />
+      {/* Dynamic Table - Only this shows skeleton */}
+      <Suspense fallback={<TransactionsTableSkeleton />}>
+        <TransactionsData />
+      </Suspense>
     </div>
   )
 }

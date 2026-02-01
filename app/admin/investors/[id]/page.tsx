@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Mail, Phone, MapPin, Calendar, FileCheck, TrendingUp, FileText, Download, ExternalLink } from 'lucide-react'
+import { Mail, Phone, MapPin, Calendar, FileCheck, TrendingUp, FileText, Download, ExternalLink, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import {
@@ -13,6 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { InvestorAccountStatus } from '@/components/admin/investor-account-status'
 
 export default async function InvestorDetailPage({ params }: { params: { id: string } }) {
   const supabase = await createClient()
@@ -37,6 +39,15 @@ export default async function InvestorDetailPage({ params }: { params: { id: str
   if (!investor) {
     redirect('/admin/investors')
   }
+
+  // Check if current admin is super admin
+  const { data: currentAdmin } = await supabase
+    .from('admin_users')
+    .select('role')
+    .eq('user_id', user.id)
+    .single()
+
+  const isSuperAdmin = currentAdmin?.role === 'super_admin'
 
   // Get investor's investments
   const { data: investments } = await supabase
@@ -106,6 +117,13 @@ export default async function InvestorDetailPage({ params }: { params: { id: str
           <Link href="/admin/investors">← Back to CRM</Link>
         </Button>
       </div>
+
+      {/* Account Status */}
+      <InvestorAccountStatus 
+        investorId={id} 
+        investorEmail={investor.email}
+        isSuperAdmin={isSuperAdmin}
+      />
 
       {/* Contact Information */}
       <Card>
@@ -218,10 +236,21 @@ export default async function InvestorDetailPage({ params }: { params: { id: str
             <CardTitle className="text-sm font-medium">Remaining</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-              ${(investments?.reduce((sum, inv) => sum + (Number(inv.amount) - Number(inv.amount_paid || 0)), 0) || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">Still to invest</p>
+            {(() => {
+              const remaining = investments?.reduce((sum, inv) => sum + (Number(inv.amount) - Number(inv.amount_paid || 0)), 0) || 0
+              const isFullyPaid = remaining <= 0
+              
+              return (
+                <>
+                  <div className={`text-2xl font-bold ${isFullyPaid ? 'text-green-600 dark:text-green-400' : 'text-orange-600 dark:text-orange-400'}`}>
+                    ${Math.max(0, remaining).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {isFullyPaid ? 'Fully invested' : 'Still to invest'}
+                  </p>
+                </>
+              )
+            })()}
           </CardContent>
         </Card>
         <Card>
@@ -298,30 +327,36 @@ export default async function InvestorDetailPage({ params }: { params: { id: str
                               style={{ width: `${Math.min(100, paymentProgress)}%` }}
                             />
                           </div>
-                          <span className="text-xs font-medium w-12 text-right">
+                          <span className={`text-xs font-medium w-16 text-right ${paymentProgress > 100 ? 'text-green-600 dark:text-green-400' : ''}`}>
                             {paymentProgress.toFixed(1)}%
                           </span>
                         </div>
-                        {amountRemaining > 0 && (
+                        {amountRemaining > 0 ? (
                           <p className="text-xs text-muted-foreground">
                             Remaining: ${Number(amountRemaining).toLocaleString('en-US', { 
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2 
                             })}
                           </p>
-                        )}
+                        ) : amountRemaining < 0 ? (
+                          <p className="text-xs text-green-600 dark:text-green-400">
+                            Overpaid by: ${Math.abs(amountRemaining).toLocaleString('en-US', { 
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2 
+                            })}
+                          </p>
+                        ) : null}
                       </div>
                     )}
 
                     {isPaid && (
-                      <div className="p-3 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
-                        <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                          ✅ Fully Invested
-                        </p>
-                        <p className="text-xs text-green-700 dark:text-green-300 mt-1">
+                      <Alert variant="success">
+                        <CheckCircle2 className="h-4 w-4" />
+                        <AlertTitle>Fully Invested</AlertTitle>
+                        <AlertDescription>
                           Last payment: {investment.last_payment_date ? new Date(investment.last_payment_date).toLocaleDateString() : 'N/A'}
-                        </p>
-                      </div>
+                        </AlertDescription>
+                      </Alert>
                     )}
 
                     {/* Payment History for this Investment */}

@@ -19,7 +19,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { ArrowDownLeft, ArrowUpRight, Download, ExternalLink, FileText, AlertTriangle, Search, Filter, X } from 'lucide-react'
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+  ContextMenuSeparator,
+} from '@/components/ui/context-menu'
+import { ArrowDownLeft, ArrowUpRight, Download, ExternalLink, FileText, AlertTriangle, Search, Filter, X, Edit, Eye, Trash2, Link as LinkIcon } from 'lucide-react'
 import { formatCurrency } from '@/lib/format'
 
 interface Transaction {
@@ -186,13 +193,12 @@ export function AdminTransactionsTableWithFilters({ transactions }: { transactio
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
               <TableHead>Receipt/Proof</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredTransactions.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={7} className="h-24 text-center text-muted-foreground">
+          {filteredTransactions.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={6} className="h-24 text-center text-muted-foreground">
                   {searchTerm || typeFilter !== 'all' || statusFilter !== 'all' || currencyFilter !== 'all'
                     ? 'No transactions match your filters'
                     : 'No transactions found'}
@@ -206,7 +212,9 @@ export function AdminTransactionsTableWithFilters({ transactions }: { transactio
                 const needsReceipt = transaction.receipt_required && !transaction.receipt_verified
 
                 return (
-                  <TableRow key={transaction.id}>
+                  <ContextMenu key={transaction.id}>
+                    <ContextMenuTrigger asChild>
+                      <TableRow className="cursor-context-menu hover:bg-muted/50">
                     <TableCell>
                       <div>
                         <div className="flex items-center gap-2">
@@ -261,32 +269,59 @@ export function AdminTransactionsTableWithFilters({ transactions }: { transactio
                     </TableCell>
                     <TableCell>
                       {hasReceipt && receipt ? (
-                        <div className="flex flex-col gap-1">
-                          <Button size="sm" variant="outline" asChild>
-                            <a href={receipt.file_url} target="_blank" rel="noopener noreferrer">
-                              <FileText className="h-3 w-3 mr-1" />
-                              Receipt
-                            </a>
-                          </Button>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-green-600 dark:text-green-400">✓ Verified</span>
                           {receipt.blockchain_link && (
-                            <Button size="sm" variant="ghost" asChild>
-                              <a href={receipt.blockchain_link} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="h-3 w-3 mr-1" />
-                                Blockchain
-                              </a>
-                            </Button>
+                            <ExternalLink className="h-3 w-3 text-muted-foreground" />
                           )}
                         </div>
                       ) : (
                         <span className="text-muted-foreground text-sm">-</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-right">
-                      <Button size="sm" variant="outline">
-                        Edit
-                      </Button>
-                    </TableCell>
                   </TableRow>
+                    </ContextMenuTrigger>
+                    <ContextMenuContent className="w-52">
+                      <ContextMenuItem>
+                        <Edit className="h-4 w-4 mr-2" />
+                        Edit Transaction
+                      </ContextMenuItem>
+                      <ContextMenuItem>
+                        <Eye className="h-4 w-4 mr-2" />
+                        View Details
+                      </ContextMenuItem>
+                      {hasReceipt && receipt && (
+                        <>
+                          <ContextMenuSeparator />
+                          <ContextMenuItem asChild>
+                            <a href={receipt.file_url} target="_blank" rel="noopener noreferrer">
+                              <FileText className="h-4 w-4 mr-2" />
+                              View Receipt
+                            </a>
+                          </ContextMenuItem>
+                          <ContextMenuItem asChild>
+                            <a href={receipt.file_url} download>
+                              <Download className="h-4 w-4 mr-2" />
+                              Download Receipt
+                            </a>
+                          </ContextMenuItem>
+                          {receipt.blockchain_link && (
+                            <ContextMenuItem asChild>
+                              <a href={receipt.blockchain_link} target="_blank" rel="noopener noreferrer">
+                                <LinkIcon className="h-4 w-4 mr-2" />
+                                View on Blockchain
+                              </a>
+                            </ContextMenuItem>
+                          )}
+                        </>
+                      )}
+                      <ContextMenuSeparator />
+                      <ContextMenuItem className="text-red-600 dark:text-red-400">
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete Transaction
+                      </ContextMenuItem>
+                    </ContextMenuContent>
+                  </ContextMenu>
                 )
               })
             )}
