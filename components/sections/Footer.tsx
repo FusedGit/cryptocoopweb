@@ -3,9 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import Twitter from 'lucide-react/dist/esm/icons/twitter';
-import Linkedin from 'lucide-react/dist/esm/icons/linkedin';
+import { Twitter, Linkedin } from 'lucide-react';
 import { AnimatedLink } from '@/components/ui/animated-link';
 
 const footerLinks: { title: string; links: { name: string; href: string }[] }[] = [

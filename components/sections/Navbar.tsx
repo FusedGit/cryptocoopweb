@@ -4,10 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
-import Menu from 'lucide-react/dist/esm/icons/menu';
-import X from 'lucide-react/dist/esm/icons/x';
+import { ArrowRight, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: 'About', href: '/about' },

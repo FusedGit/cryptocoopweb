@@ -1,8 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-// Direct import to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
 

@@ -4,7 +4,7 @@ import { logAdminAction } from '@/lib/admin'
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await createClient()
 
@@ -101,7 +101,7 @@ export async function PATCH(
     await logAdminAction('update_investment', 'investment', id, {
       amount,
       apy_rate,
-      payment_status,
+      status,
     })
 
     return NextResponse.json({

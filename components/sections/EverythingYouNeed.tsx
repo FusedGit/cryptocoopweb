@@ -1,14 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import ArrowDownUp from 'lucide-react/dist/esm/icons/arrow-down-up';
-import Shield from 'lucide-react/dist/esm/icons/shield';
-import Zap from 'lucide-react/dist/esm/icons/zap';
-import Globe from 'lucide-react/dist/esm/icons/globe';
-import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
-import Wallet from 'lucide-react/dist/esm/icons/wallet';
-import Check from 'lucide-react/dist/esm/icons/check';
+import { ArrowDownUp, Shield, Zap, Globe, TrendingUp, Wallet, Check } from 'lucide-react';
 import OptimizedVideo from '@/components/ui/OptimizedVideo';
 import AnimatedSection from '@/components/AnimatedSection';
 

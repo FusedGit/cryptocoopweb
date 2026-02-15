@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-// Direct import to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 import ExchangeCardStack from '@/components/ui/ExchangeCardStack';
 import FloatingSocialProof from '@/components/ui/FloatingSocialProof';

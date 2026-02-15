@@ -2,9 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import Plus from 'lucide-react/dist/esm/icons/plus';
-import Minus from 'lucide-react/dist/esm/icons/minus';
+import { Plus, Minus } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const faqs = [

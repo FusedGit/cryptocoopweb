@@ -208,7 +208,7 @@ export function AdminTransactionsTableWithFilters({ transactions }: { transactio
               filteredTransactions.map((transaction) => {
                 const isIncoming = transaction.type === 'deposit' || transaction.type === 'payout'
                 const hasReceipt = transaction.receipts && transaction.receipts.length > 0
-                const receipt = hasReceipt ? transaction.receipts[0] : null
+                const receipt = hasReceipt ? transaction.receipts![0] : null
                 const needsReceipt = transaction.receipt_required && !transaction.receipt_verified
 
                 return (

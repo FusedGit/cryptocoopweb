@@ -15,7 +15,7 @@ export function InvestmentGrowthChart({ principal, monthlyRate, months }: Invest
 
   useEffect(() => {
     setMounted(true)
-    const chartData = []
+    const chartData: { month: number; value: number; principal: number }[] = []
     let currentValue = principal
     
     for (let i = 0; i <= months; i++) {
@@ -71,7 +71,7 @@ export function InvestmentGrowthChart({ principal, monthlyRate, months }: Invest
               borderRadius: '8px',
               padding: '8px 12px',
             }}
-            formatter={(value: number) => [`$${value.toFixed(2)}`, 'Value']}
+            formatter={(value: number | undefined) => [`$${(value ?? 0).toFixed(2)}`, 'Value']}
             labelFormatter={(label) => `Month ${label}`}
           />
           <Area

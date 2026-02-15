@@ -83,8 +83,8 @@ export function AdminTransactionsTable({ transactions }: { transactions: Transac
           ) : (
             transactions.map((transaction) => {
               const isIncoming = transaction.type === 'deposit' || transaction.type === 'payout'
-              const hasReceipt = transaction.receipts && transaction.receipts.length > 0
-              const receipt = hasReceipt ? transaction.receipts[0] : null
+              const receipt = transaction.receipts?.[0] ?? null
+              const hasReceipt = receipt !== null
               const needsReceipt = transaction.receipt_required && !transaction.receipt_verified
 
               return (

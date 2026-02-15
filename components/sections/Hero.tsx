@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import { ArrowRight } from 'lucide-react';
 import OptimizedVideo from '@/components/ui/OptimizedVideo';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import { EncryptedText } from '@/components/ui/encrypted-text';

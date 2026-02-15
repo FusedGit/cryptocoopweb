@@ -5,9 +5,15 @@ import { getCryptoPrice } from '@/lib/coingecko'
 import { logAdminAction } from '@/lib/admin'
 import { detectInternalTransfer, calculateHistoricalUSDValue, calculateCurrentUSDValue } from '@/lib/swap-detection'
 
+type WalletTotals = {
+  total_received: number
+  total_sent: number
+  tx_count: number
+}
+
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await createClient()
 
@@ -207,7 +213,19 @@ export async function POST(
       .rpc('calculate_wallet_totals', { wallet_uuid: id })
       .single()
 
-    if (totalsData) {
+    const hasWalletTotals = (
+      value: unknown
+    ): value is WalletTotals => {
+      if (!value || typeof value !== 'object') return false
+      const candidate = value as Record<string, unknown>
+      return (
+        typeof candidate.total_received === 'number' &&
+        typeof candidate.total_sent === 'number' &&
+        typeof candidate.tx_count === 'number'
+      )
+    }
+
+    if (hasWalletTotals(totalsData)) {
       await supabase
         .from('wallet_addresses')
         .update({

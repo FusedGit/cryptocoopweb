@@ -14,7 +14,7 @@ export function MonthlyEarningsChart({ monthlyPayout, months }: MonthlyEarningsC
 
   useEffect(() => {
     setMounted(true)
-    const chartData = []
+    const chartData: { month: string; earnings: number; cumulative: number }[] = []
     
     for (let i = 1; i <= Math.min(months, 12); i++) {
       chartData.push({
@@ -60,7 +60,7 @@ export function MonthlyEarningsChart({ monthlyPayout, months }: MonthlyEarningsC
               borderRadius: '8px',
               padding: '8px 12px',
             }}
-            formatter={(value: number) => [`$${value.toFixed(2)}`, 'Monthly Earnings']}
+            formatter={(value: number | undefined) => [`$${(value ?? 0).toFixed(2)}`, 'Monthly Earnings']}
           />
           <Bar
             dataKey="earnings"

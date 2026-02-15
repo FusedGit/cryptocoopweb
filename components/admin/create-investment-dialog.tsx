@@ -102,8 +102,6 @@ export function CreateInvestmentDialog({ investors }: { investors: Investor[] })
         apy_rate: '',
         lock_period_months: '',
         start_date: new Date().toISOString().split('T')[0],
-        payment_status: 'unpaid',
-        amount_paid: '0',
         notes: '',
       })
       setContractFile(null)

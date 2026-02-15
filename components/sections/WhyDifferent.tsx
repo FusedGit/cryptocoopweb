@@ -1,10 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import Check from 'lucide-react/dist/esm/icons/check';
-import X from 'lucide-react/dist/esm/icons/x';
-import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import { Check, X, ArrowRight } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const comparisons = [

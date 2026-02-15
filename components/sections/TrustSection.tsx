@@ -1,11 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
-import Shield from 'lucide-react/dist/esm/icons/shield';
-import Zap from 'lucide-react/dist/esm/icons/zap';
-import Globe from 'lucide-react/dist/esm/icons/globe';
-import Lock from 'lucide-react/dist/esm/icons/lock';
+import { Shield, Zap, Globe, Lock } from 'lucide-react';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const stats = [

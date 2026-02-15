@@ -162,6 +162,8 @@ export function CreateTransactionDialog({ investors }: { investors: Investor[] }
         description: '',
         hash_code: '',
         blockchain_link: '',
+        conversion_rate: '',
+        amount_usd: '',
       })
       setFile(null)
       setInvestments([])

@@ -5,7 +5,7 @@ import { logAdminAction } from '@/lib/admin'
 // Check if investor has an auth account
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await createClient()
 
@@ -53,7 +53,7 @@ export async function GET(
 // Create auth account for investor
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const supabase = await createClient()
 
