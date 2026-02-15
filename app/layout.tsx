@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, IBM_Plex_Mono } from "next/font/google";
+import { Geist, Geist_Mono, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,6 +18,13 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: 'swap',
 });
 
@@ -52,7 +59,7 @@ export default function RootLayout({
         <link rel="preload" href="/assets/02.mp4" as="video" type="video/mp4" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable} antialiased`}
       >
         {children}
         <SonnerToaster />

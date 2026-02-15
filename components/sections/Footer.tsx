@@ -28,7 +28,7 @@ const footerLinks: { title: string; links: { name: string; href: string }[] }[] 
       { name: 'About', href: '/about' },
       { name: 'Business Solutions', href: '/business' },
       { name: 'Investors', href: '/investors' },
-      { name: 'Investor Panel', href: '/investors/login' },
+      { name: 'Investor Panel', href: '/login' },
     ]
   }
 ];
