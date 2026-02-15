@@ -1,8 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { TrendingUp, Shield, CheckCircle2, ExternalLink, BarChart3, Zap, ArrowRight } from 'lucide-react';
+import {
+  TrendingUp,
+  Shield,
+  CheckCircle2,
+  ExternalLink,
+  BarChart3,
+  Zap,
+  ArrowRight,
+  Lock,
+  Eye,
+  Landmark,
+  BadgeCheck,
+  Building2,
+} from 'lucide-react';
 import Navbar from '@/components/sections/Navbar';
 import Footer from '@/components/sections/Footer';
 import { GrowthChart } from '@/components/ui/GrowthChart';
@@ -11,414 +23,329 @@ import { PerformanceMetrics } from '@/components/ui/PerformanceMetrics';
 import { ROIComparison } from '@/components/ui/ROIComparison';
 import { CapitalFlow } from '@/components/ui/CapitalFlow';
 
+const lockupOptions = [
+  {
+    title: '12-Month Lock',
+    apy: '60%',
+    copy: 'For long-term capital partners who want maximum annualized yield.',
+    emphasis: true,
+  },
+  {
+    title: '6-Month Lock',
+    apy: '30%',
+    copy: 'For mid-term allocation with strong upside and lower lock duration.',
+  },
+  {
+    title: '3-Month Lock',
+    apy: '10%',
+    copy: 'For short-term strategic capital with faster liquidity cycle.',
+  },
+];
+
+const executionFlow = [
+  {
+    title: 'Capital In',
+    copy: 'Angel investor capital is allocated into active liquidity operations, not idle reserves.',
+    icon: Landmark,
+  },
+  {
+    title: 'Trade Deployment',
+    copy: 'Funds are used as working liquidity for high-frequency, spread-capture, and OTC/P2P execution.',
+    icon: Zap,
+  },
+  {
+    title: 'Yield Distribution',
+    copy: 'Performance is tracked in the investor portal and paid according to your selected lock term.',
+    icon: CheckCircle2,
+  },
+];
+
 export default function InvestorsPage() {
   return (
     <main className="min-h-screen w-full bg-background">
       <Navbar />
       
-      <section className="container mx-auto px-6 lg:px-8 pt-32 pb-32">
+      <section className="container mx-auto px-6 lg:px-8 pt-32 pb-28">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
-          {/* Header */}
-          <div className="mb-20">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-5 heading-text">
-              Investment Overview
-            </h1>
-            <p className="text-lg text-muted-foreground professional-text max-w-2xl">
-              Proven trading operations with verifiable performance metrics
-            </p>
-          </div>
-
-          {/* Executive Summary */}
+          {/* Hero */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
+            transition={{ delay: 0.15 }}
+            className="relative overflow-hidden bg-gradient-to-br from-primary/15 via-primary/10 to-accent/10 p-10 md:p-14 border border-primary/20 rounded-2xl refined-shadow mb-12"
           >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text">
-              Performance Summary
-            </h2>
-            <div className="space-y-5 text-[15px] text-muted-foreground leading-relaxed professional-text">
-              <p>
-                Cryptocoop maintains the #1 ranking on LocalCoinSwap's leaderboard, operating a validated P2P trading model with 80x revenue growth from 2020 to 2025 achieved through organic expansion.
-              </p>
-              <p>
-                We are engaging with strategic partners to expand our trading operations and accelerate growth trajectory.
-              </p>
-            </div>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 16, delay: 0.2 }}
+              className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-primary/15 blur-3xl"
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 100, damping: 16, delay: 0.28 }}
+              className="absolute -bottom-24 -left-20 w-64 h-64 rounded-full bg-foreground/10 blur-3xl"
+            />
 
-            <div className="mt-10">
-              <PerformanceMetrics />
-            </div>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-background/60 border border-border mb-6">
+                <BadgeCheck className="w-4 h-4 text-primary" />
+                <span className="text-xs md:text-sm text-foreground professional-text font-medium">
+                  Built for serious angel capital, not VC dependency
+                </span>
+              </div>
 
-            <p className="mt-8 text-center text-sm text-muted-foreground professional-text">
-              UK-registered company, operational since 2018
-            </p>
+              <div className="grid lg:grid-cols-2 gap-10 items-end">
+                <div>
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl text-foreground heading-text leading-tight">
+                    Liquidity-backed yield from real trading operations
+                  </h1>
+                  <p className="mt-5 text-base md:text-lg text-muted-foreground professional-text leading-relaxed max-w-2xl">
+                    We deploy investor capital as active liquidity across our trading stack. No VC runway model. No burn model. Just operational execution and transparent reporting.
+                  </p>
+                </div>
+                <div className="bg-background/80 border border-border rounded-xl p-6">
+                  <p className="text-sm text-muted-foreground professional-text mb-1">Lock Duration</p>
+                  <motion.p
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ type: 'spring', stiffness: 140, damping: 18, delay: 0.3 }}
+                    className="text-6xl md:text-7xl text-foreground heading-text tracking-tight"
+                  >
+                    60% APY
+                  </motion.p>
+                  <p className="text-sm text-muted-foreground professional-text mt-2">12-month lock of capital</p>
+                  <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+                    <div className="rounded-lg border border-border bg-card p-3">
+                      <p className="text-muted-foreground professional-text">6 months</p>
+                      <p className="text-2xl text-foreground heading-text">30%</p>
+                    </div>
+                    <div className="rounded-lg border border-border bg-card p-3">
+                      <p className="text-muted-foreground professional-text">3 months</p>
+                      <p className="text-2xl text-foreground heading-text">10%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Capital Deployment */}
+          {/* How Returns Are Generated */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="bg-gradient-to-br from-primary/10 to-primary/5 p-10 md:p-12 border border-primary/20 rounded-lg mb-12"
+            className="bg-card p-10 md:p-12 border border-border rounded-xl refined-shadow mb-12"
           >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text flex items-center gap-3">
-              <Zap className="w-7 h-7" strokeWidth={1.5} />
-              Capital Deployment Model
+            <h2 className="text-2xl md:text-3xl text-foreground mb-4 heading-text flex items-center gap-3">
+              <TrendingUp className="w-7 h-7" strokeWidth={1.5} />
+              How We Generate Investor Yield
             </h2>
-            <div className="space-y-5 text-[15px] text-foreground/90 leading-relaxed professional-text mb-8">
+            <p className="text-[15px] text-muted-foreground professional-text leading-relaxed mb-8 max-w-3xl">
+              Cryptocoop uses investor funds as operational liquidity for active trading. Returns are derived from execution and spread capture, not speculative fundraising cycles.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-5 mb-10">
+              {executionFlow.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', stiffness: 110, damping: 17, delay: 0.08 * index }}
+                  className="bg-background border border-border rounded-xl p-6"
+                >
+                  <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
+                    <item.icon className="w-5 h-5 text-foreground" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-lg text-foreground heading-text mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground professional-text leading-relaxed">{item.copy}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="mb-10">
+              <CapitalFlow />
+            </div>
+
+            <div className="space-y-4 text-[15px] text-muted-foreground leading-relaxed professional-text">
               <p>
-                Our operational model follows a direct capital-to-revenue pathway: invested capital deploys immediately into high-velocity trades with a 30-day revenue cycle.
+                We have operated in this market cycle since 2018, with high-volume track record and platform history across LocalCoinSwap, AgoraDesk, and LocalMonero.
               </p>
               <p>
-                This eliminates traditional startup risks associated with R&D timelines or product-market fit uncertainty. We're scaling proven operations, not developing new products.
+                This structure is specifically designed for angel investors who want exposure to crypto execution economics without relying on VC-style dilution or long product burn.
               </p>
             </div>
-            
-            <CapitalFlow />
           </motion.div>
 
-          {/* Track Record with Chart */}
+          {/* Lock-up Terms */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
+            className="bg-gradient-to-br from-primary/10 to-primary/5 p-10 md:p-12 border border-primary/20 rounded-xl mb-12"
           >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-8 heading-text flex items-center gap-3">
-              <BarChart3 className="w-7 h-7" strokeWidth={1.5} />
-              Historical Performance & Projections
+            <h2 className="text-2xl md:text-3xl text-foreground mb-4 heading-text flex items-center gap-3">
+              <Lock className="w-7 h-7" strokeWidth={1.5} />
+              Lock-up Terms & Target APY
             </h2>
-            
-            <div className="mb-10">
-              <GrowthChart />
+            <p className="text-[15px] text-foreground/90 professional-text leading-relaxed mb-8 max-w-3xl">
+              We align return profile with commitment horizon. Longer lock duration enables deeper capital deployment and higher yield potential.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-5">
+              {lockupOptions.map((option, index) => (
+                <motion.div
+                  key={option.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 16, delay: 0.08 * index }}
+                  className={`rounded-xl border p-6 ${
+                    option.emphasis
+                      ? 'bg-background border-primary/35'
+                      : 'bg-background/70 border-border'
+                  }`}
+                >
+                  <p className="text-sm text-muted-foreground professional-text">{option.title}</p>
+                  <p className="text-5xl text-foreground heading-text mt-2">{option.apy}</p>
+                  <p className="text-sm text-muted-foreground professional-text mt-2">Target APY</p>
+                  <p className="text-sm text-muted-foreground professional-text mt-4 leading-relaxed">{option.copy}</p>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm professional-text">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left py-3 px-2 font-medium text-foreground">Year</th>
-                    <th className="text-right py-3 px-2 font-medium text-foreground">Turnover</th>
-                    <th className="text-right py-3 px-2 font-medium text-foreground">Net Profit</th>
-                    <th className="text-right py-3 px-2 font-medium text-foreground">Capital</th>
-                  </tr>
-                </thead>
-                <tbody className="text-muted-foreground">
-                  <tr className="border-b border-border/50">
-                    <td className="py-3 px-2">2020</td>
-                    <td className="text-right py-3 px-2">$300K</td>
-                    <td className="text-right py-3 px-2">$5.2K</td>
-                    <td className="text-right py-3 px-2">$20K</td>
-                  </tr>
-                  <tr className="border-b border-border/50">
-                    <td className="py-3 px-2">2021</td>
-                    <td className="text-right py-3 px-2">$1M</td>
-                    <td className="text-right py-3 px-2">$23K</td>
-                    <td className="text-right py-3 px-2">$28K</td>
-                  </tr>
-                  <tr className="border-b border-border/50">
-                    <td className="py-3 px-2">2022</td>
-                    <td className="text-right py-3 px-2">$3M</td>
-                    <td className="text-right py-3 px-2">$111K</td>
-                    <td className="text-right py-3 px-2">$49K</td>
-                  </tr>
-                  <tr className="border-b border-border/50">
-                    <td className="py-3 px-2">2023</td>
-                    <td className="text-right py-3 px-2">$8M</td>
-                    <td className="text-right py-3 px-2">$303K</td>
-                    <td className="text-right py-3 px-2">$90K</td>
-                  </tr>
-                  <tr className="border-b border-border/50">
-                    <td className="py-3 px-2">2024</td>
-                    <td className="text-right py-3 px-2">$13M</td>
-                    <td className="text-right py-3 px-2">$498K</td>
-                    <td className="text-right py-3 px-2">$120K</td>
-                  </tr>
-                  <tr className="border-b border-border/50 bg-accent/20">
-                    <td className="py-3 px-2 font-medium text-foreground">2025</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$15M</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$575K</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$100K</td>
-                  </tr>
-                  <tr className="bg-primary/5">
-                    <td className="py-3 px-2 font-medium text-foreground">2026 (projected)</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$24M</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$924K</td>
-                    <td className="text-right py-3 px-2 font-medium text-foreground">$454K</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p className="mt-8 text-center text-sm text-muted-foreground professional-text">
-              Growth trajectory constrained by capital availability rather than market capacity or operational limitations
+            <p className="mt-8 text-sm text-foreground/80 professional-text">
+              Example projection: $500,000 at 12-month lock targets $300,000 yield, with reporting visibility in your investor panel.
             </p>
           </motion.div>
 
-          {/* Investment Tiers */}
+          {/* Performance, Scale, and Transparency */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
+            className="bg-card p-10 md:p-12 border border-border rounded-xl refined-shadow mb-12"
           >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-4 heading-text">
-              Investment Structure & ROI Projections
+            <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text flex items-center gap-3">
+              <BarChart3 className="w-7 h-7" strokeWidth={1.5} />
+              2026 Scale Trajectory
             </h2>
-            <p className="text-[15px] text-muted-foreground professional-text mb-10 leading-relaxed max-w-3xl">
-              Investment scales operations proportionally. Higher capital deployment enables greater trade volume and corresponding profit generation.
-            </p>
-
-            <div className="grid lg:grid-cols-2 gap-10 mb-12">
+            <div className="grid lg:grid-cols-2 gap-10 mb-10">
               <div>
-                <h3 className="text-lg text-foreground heading-text mb-6">Investment Tiers Comparison</h3>
-                <ProjectionChart />
+                <h3 className="text-lg text-foreground heading-text mb-5">Historical Growth</h3>
+                <GrowthChart />
               </div>
               <div>
-                <h3 className="text-lg text-foreground heading-text mb-6">ROI Performance</h3>
+                <h3 className="text-lg text-foreground heading-text mb-5">Forward Projection</h3>
+                <ProjectionChart />
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-10">
+              <div>
+                <h3 className="text-lg text-foreground heading-text mb-5">Performance Indicators</h3>
+                <PerformanceMetrics />
+              </div>
+              <div>
+                <h3 className="text-lg text-foreground heading-text mb-5">Yield Comparison</h3>
                 <ROIComparison />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { tier: 'Tier 1', amount: '$200K', roi: '60%', returns: '$120K', turnover: '$24M' },
-                { tier: 'Tier 2', amount: '$500K', roi: '50%', returns: '$250K', turnover: '$45M', recommended: true },
-                { tier: 'Tier 3', amount: '$1M', roi: '45%', returns: '$450K', turnover: '$72M' },
-              ].map((tier) => (
-                <div
-                  key={tier.tier}
-                  className={`${
-                    tier.recommended 
-                      ? 'bg-accent/10 border-2 border-primary/30' 
-                      : 'bg-background border border-border'
-                  } rounded-lg p-8 hover:border-foreground/20 transition-colors relative`}
-                >
-                  {tier.recommended && (
-                    <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-primary px-3 py-1 rounded-full">
-                      <span className="text-xs text-white professional-text font-medium">Recommended</span>
-                    </div>
-                  )}
-                  <div className="mb-6">
-                    <p className="text-xs text-muted-foreground professional-text mb-3">{tier.tier}</p>
-                    <p className="text-4xl text-foreground mb-2 heading-text">{tier.amount}</p>
-                    <p className="text-sm text-muted-foreground professional-text">Investment</p>
-                  </div>
-                  <div className="space-y-4 text-center">
-                    <div className="border-t border-border pt-4">
-                      <p className="text-2xl text-foreground heading-text">{tier.roi}</p>
-                      <p className="text-xs text-muted-foreground professional-text">1-Year ROI</p>
-                    </div>
-                    <div className="bg-accent/30 p-4 rounded-lg">
-                      <p className="text-lg text-foreground heading-text">{tier.returns}</p>
-                      <p className="text-xs text-muted-foreground professional-text">Projected Profit Share</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground professional-text mb-1">2026 Turnover:</p>
-                      <p className="text-xl text-foreground heading-text">{tier.turnover}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="mt-8 bg-accent/20 border border-border rounded-xl p-6">
+              <p className="text-sm text-foreground professional-text font-medium">
+                2026 projection: <span className="heading-text text-lg">$40M turnover</span> with expansion acceleration from a major product launch currently under NDA.
+              </p>
             </div>
-
-            <p className="mt-8 text-center text-sm text-muted-foreground professional-text">
-              Quarterly distribution schedule begins Q2 2026
-            </p>
           </motion.div>
 
-          {/* Why Invest */}
+          {/* Investor Portal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
+            className="bg-card p-10 md:p-12 border border-border rounded-xl refined-shadow mb-12"
           >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-10 heading-text text-center">
-              Investment Characteristics
+            <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text">
+              Investor Portal Visibility
             </h2>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-foreground/60 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="text-base text-foreground heading-text mb-1">Verifiable Performance</h3>
-                    <p className="text-sm text-muted-foreground professional-text leading-relaxed">
-                      #1 ranking on LocalCoinSwap with publicly accessible metrics and real-time verification
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Zap className="w-5 h-5 text-foreground/60 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="text-base text-foreground heading-text mb-1">Rapid Deployment</h3>
-                    <p className="text-sm text-muted-foreground professional-text leading-relaxed">
-                      Capital allocates to active trading within days, with revenue generation commencing within 30 days
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="w-5 h-5 text-foreground/60 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="text-base text-foreground heading-text mb-1">Linear Scalability</h3>
-                    <p className="text-sm text-muted-foreground professional-text leading-relaxed">
-                      Direct correlation between invested capital and trading volume, enabling predictable growth projections
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <Shield className="w-5 h-5 text-foreground/60 mt-0.5 flex-shrink-0" strokeWidth={1.5} />
-                  <div>
-                    <h3 className="text-base text-foreground heading-text mb-1">Consistent Returns</h3>
-                    <p className="text-sm text-muted-foreground professional-text leading-relaxed">
-                      Quarterly distributions maintained regardless of short-term market fluctuations
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <p className="text-[15px] text-muted-foreground professional-text leading-relaxed mb-8 max-w-3xl">
+              Every investor gets access to a private panel to monitor allocation, payout status, lock period, and performance snapshots.
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { title: 'Stake Overview', icon: Eye, copy: 'Principal, selected lock duration, and current status.' },
+                { title: 'Capital Activity', icon: TrendingUp, copy: 'How your liquidity is being deployed across operations.' },
+                { title: 'Payout Tracking', icon: CheckCircle2, copy: 'Distribution timeline and payment confirmations.' },
+                { title: 'Security Layer', icon: Shield, copy: 'Access logs, account controls, and policy safeguards.' },
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ type: 'spring', stiffness: 110, damping: 17, delay: 0.08 * idx }}
+                  className="bg-background border border-border rounded-lg p-5"
+                >
+                  <item.icon className="w-5 h-5 text-foreground mb-3" strokeWidth={1.5} />
+                  <p className="text-sm text-foreground professional-text font-medium mb-2">{item.title}</p>
+                  <p className="text-xs text-muted-foreground professional-text leading-relaxed">{item.copy}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Verification */}
+          {/* Trust Proof + Imprint */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="bg-gradient-to-br from-accent/20 to-accent/10 p-10 md:p-12 border border-accent/50 rounded-lg mb-12"
-          >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-4 heading-text text-center">
-              Performance Verification
-            </h2>
-            <p className="text-[15px] text-center text-muted-foreground professional-text leading-relaxed mb-8 max-w-2xl mx-auto">
-              All trading metrics, volume data, and performance rankings are publicly accessible for independent verification.
-            </p>
-            <div className="flex justify-center">
-              <a
-                href="https://localcoinswap.com/profile/cryptocoop"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-md professional-text font-medium hover:opacity-90 transition-opacity elevated-shadow"
-              >
-                <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
-                View Trading Profile
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Platform Expansion */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
+            className="bg-gradient-to-br from-accent/20 to-accent/10 p-10 md:p-12 border border-accent/50 rounded-xl mb-12"
           >
             <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text">
-              Platform Strategy
+              Trust, Proof, and Imprint
             </h2>
-            <div className="space-y-5 text-[15px] text-muted-foreground leading-relaxed professional-text mb-8">
-              <p>
-                Our operations have expanded beyond LocalCoinSwap with the launch of a native Telegram trading application, broadening market access and user acquisition channels.
-              </p>
-              <p>
-                We maintain ongoing discussions with Telegram regarding platform integration opportunities and scaling partnerships.
-              </p>
-            </div>
-            <div className="bg-accent/20 p-6 rounded-lg">
-              <p className="text-center text-sm text-foreground professional-text font-medium mb-4">Multi-Platform Presence</p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-card p-4 rounded-lg border border-border text-center">
-                  <p className="text-foreground professional-text font-medium mb-1">LocalCoinSwap</p>
-                  <p className="text-sm text-muted-foreground professional-text">#1 Ranked Trader</p>
+            <div className="grid lg:grid-cols-2 gap-10">
+              <div className="space-y-4 text-[15px] text-muted-foreground professional-text leading-relaxed">
+                <p className="text-foreground font-medium">Operational confidence signals:</p>
+                <ul className="space-y-2">
+                  <li>• Trading history across LocalCoinSwap, AgoraDesk, and LocalMonero dating back to 2018.</li>
+                  <li>• Public profile credibility and ranking history available for independent verification.</li>
+                  <li>• Example institutional wallet profile with over 500 BTC tracked as liquidity proof point.</li>
+                  <li>• No VC dependency; growth funded through operations and aligned angel capital.</li>
+                </ul>
+                <a
+                  href="https://localcoinswap.com/profile/cryptocoop"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-foreground hover:text-primary transition-colors professional-text font-medium"
+                >
+                  Verify public trading profile
+                  <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
+                </a>
+              </div>
+              <div className="bg-background border border-border rounded-xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Building2 className="w-5 h-5 text-foreground" strokeWidth={1.5} />
+                  <p className="text-base text-foreground heading-text">Corporate Imprint</p>
                 </div>
-                <div className="bg-card p-4 rounded-lg border border-border text-center">
-                  <p className="text-foreground professional-text font-medium mb-1">Telegram</p>
-                  <p className="text-sm text-muted-foreground professional-text">Native Application</p>
-                </div>
+                <ul className="space-y-3 text-sm text-muted-foreground professional-text">
+                  <li>• Registered UK entity with cross-jurisdiction operations.</li>
+                  <li>• Multi-market execution footprint (EU, UK, APAC corridors).</li>
+                  <li>• Investor documentation available under NDA for due diligence.</li>
+                  <li>• Structured onboarding and compliance checks for strategic partners.</li>
+                </ul>
               </div>
             </div>
-          </motion.div>
-
-          {/* Investment Terms */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="bg-gradient-to-br from-primary/10 to-primary/5 p-10 md:p-12 border border-primary/20 rounded-lg mb-12"
-          >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-6 heading-text">
-              Investment Parameters
-            </h2>
-            <div className="space-y-5 text-[15px] text-foreground/90 leading-relaxed professional-text mb-8">
-              <p>
-                Current fundraising target: $200K - $1M from 4-6 strategic partners
-              </p>
-              <p className="font-medium">Allocation objectives:</p>
-              <ul className="space-y-2 pl-6">
-                <li>• Expand trading capital for increased volume execution</li>
-                <li>• Scale operations to $24M-$72M annual turnover</li>
-                <li>• Deliver 45-60% ROI through quarterly distributions beginning Q2 2026</li>
-              </ul>
-            </div>
-            <div className="bg-white p-6 rounded-lg border border-primary/20">
-              <p className="text-sm text-foreground professional-text font-medium mb-4">Key Terms</p>
-              <ul className="space-y-2 text-sm text-muted-foreground professional-text">
-                <li>• Profit-sharing structure (detailed terms available upon request)</li>
-                <li>• Quarterly distribution schedule</li>
-                <li>• Wire transfer settlement within 30 days of commitment</li>
-                <li>• Initial distribution: Q2 2026</li>
-              </ul>
-            </div>
-          </motion.div>
-
-          {/* Next Steps */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0 }}
-            className="bg-card p-10 md:p-12 border border-border rounded-lg refined-shadow mb-12"
-          >
-            <h2 className="text-2xl md:text-3xl text-foreground mb-8 heading-text">
-              Engagement Process
-            </h2>
-            <div className="space-y-6 text-[15px] text-muted-foreground leading-relaxed professional-text">
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-foreground professional-text font-medium flex-shrink-0 text-sm">
-                  1
-                </div>
-                <p>Initial consultation to review investment terms and address inquiries</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-foreground professional-text font-medium flex-shrink-0 text-sm">
-                  2
-                </div>
-                <p>Comprehensive financial documentation and legal agreement review</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center text-foreground professional-text font-medium flex-shrink-0 text-sm">
-                  3
-                </div>
-                <p>Capital transfer to secure allocation and Q2 2026 distribution eligibility</p>
-              </div>
-            </div>
-            <div className="mt-8 bg-accent/30 p-6 rounded-lg text-center">
-              <p className="text-sm text-foreground professional-text">
-                Limited to 4-6 strategic partners
+            <div className="mt-6">
+              <p className="text-xs text-muted-foreground professional-text">
+                Note: APY values represent target returns based on current execution model and are not a guaranteed outcome.
               </p>
             </div>
           </motion.div>
@@ -427,15 +354,15 @@ export default function InvestorsPage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            transition={{ delay: 0.8 }}
             className="text-center space-y-8"
           >
             <div className="max-w-2xl mx-auto">
               <h3 className="text-xl md:text-2xl text-foreground heading-text mb-4">
-                Capital-efficient growth opportunity
+                Become a strategic liquidity partner
               </h3>
               <p className="text-[15px] text-muted-foreground professional-text leading-relaxed">
-                Partner with established trading operations. Investment capitalizes on proven performance rather than speculative development.
+                We are scaling aggressively in 2026 and selectively onboarding angel investors aligned with long-term execution.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -454,7 +381,7 @@ export default function InvestorsPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-white border border-border text-foreground px-6 py-3 rounded-md professional-text font-medium hover:bg-accent/30 transition-colors"
               >
-                Contact Investment Team
+                Speak with Investment Team
                 <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
               </a>
             </div>

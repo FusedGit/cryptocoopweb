@@ -1,35 +1,40 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ShoppingCart, Lock, Zap, Shield } from 'lucide-react';
+import { ShoppingCart, Lock, Zap, Shield, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const highlights = [
   {
-    title: 'Privacy-first design',
-    description: 'Built with financial privacy at the core. Trade with confidence knowing your data remains yours.',
-    icon: Shield,
-  },
-  {
-    title: 'Multiple assets supported',
-    description: 'Access a curated selection of digital currencies including XMR, BTC, TON and more.',
-    image: '/assets/xmr.svg',
-  },
-  {
-    title: 'Flexible payment options',
-    description: 'Connect your preferred payment method. Bank transfers, cash, and global payment systems supported.',
+    title: 'Buy instantly',
+    description: 'Purchase crypto in seconds. No KYC verification, no waiting periods, no bureaucracy. Just fast, private transactions.',
     icon: ShoppingCart,
   },
   {
-    title: 'Your funds, your control',
-    description: 'Non-custodial architecture means you maintain full control. No account freezes or intrusive checks.',
+    title: 'Sell without limits',
+    description: 'Convert your crypto to cash instantly. No withdrawal limits, no account freezes, no questions asked.',
+    icon: Zap,
+  },
+  {
+    title: 'Swap seamlessly',
+    description: 'Exchange between BTC, ETH, XMR, TON, USDT and more. Lightning-fast swaps with zero surveillance.',
+    image: '/assets/xmr.svg',
+  },
+  {
+    title: 'Swiss-grade privacy',
+    description: 'Absolute anonymity guaranteed. No ID verification, no data collection, no tracking. Your financial activity stays yours.',
+    icon: Shield,
+  },
+  {
+    title: 'All coins supported',
+    description: 'Access the full spectrum of digital assets. From Bitcoin to privacy coins, we support what matters to you.',
     icon: Lock,
   },
   {
-    title: 'Seamless integration',
-    description: 'Native Telegram experience. No additional apps or complicated setup required.',
-    icon: Zap,
+    title: 'Global payments',
+    description: 'Bank transfers, cash deposits, international wires. Trade from anywhere with any payment method you prefer.',
+    icon: ShoppingCart,
   },
 ];
 
@@ -45,10 +50,10 @@ export default function FeatureHighlights() {
           className="text-center mb-20"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 heading-text">
-            Built for modern traders
+            Everything you need. Nothing you don't.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto professional-text">
-            A platform designed around security, simplicity, and user sovereignty.
+            While other exchanges demand your identity, track your trades, and limit your freedom—we do the opposite.
           </p>
         </motion.div>
 
@@ -84,6 +89,39 @@ export default function FeatureHighlights() {
             </AnimatedSection>
           ))}
         </div>
+
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-16 text-center"
+        >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.a
+              href="https://t.me/TheCryptoCoopBot"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-foreground text-background px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90 elevated-shadow"
+            >
+              Start Trading Now
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+            <motion.a
+              href="https://localcoinswap.com/profile/cryptocoop"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white border border-border text-foreground px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center justify-center gap-2 transition-colors hover:bg-accent/30"
+            >
+              Explore P2P
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -2,31 +2,46 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
+import Plus from 'lucide-react/dist/esm/icons/plus';
+import Minus from 'lucide-react/dist/esm/icons/minus';
 import AnimatedSection from '@/components/AnimatedSection';
 
 const faqs = [
   {
-    question: 'What makes Cryptocoop different from other exchanges?',
-    answer: 'Cryptocoop is built directly into Telegram with privacy as a foundational principle. We operate without identity verification requirements and maintain a non-custodial architecture that gives you complete control over your assets.',
+    question: 'Do you really not collect any personal data?',
+    answer: 'Absolutely none. No KYC, no passport scans, no selfies, no address verification. We have zero personal information about our users—by design. Your privacy is not a feature, it&apos;s our foundation.',
   },
   {
-    question: 'Is identity verification required?',
-    answer: 'No identity verification is needed. We prioritize financial privacy and believe users should maintain control over their personal information while accessing digital asset markets.',
+    question: 'How can I trust you without KYC?',
+    answer: 'The question is backwards. KYC doesn\'t protect you—it exposes you. Every exchange with your data is a data breach waiting to happen. We can\'t lose what we never collect. Our non-custodial design means we never hold your funds, so there\'s nothing to "trust" us with.',
   },
   {
-    question: 'Which digital assets are supported?',
-    answer: 'We support a curated selection of major cryptocurrencies including BTC, ETH, TON, and USDT. Our platform specializes in privacy-focused assets like Monero (XMR) with competitive rates and reliable liquidity.',
+    question: 'What cryptocurrencies can I trade?',
+    answer: 'All major assets: BTC, ETH, XMR, TON, USDT, LTC, and more. We specialize in privacy coins like Monero with deep liquidity. If you need a specific coin, ask our support team—we\'re constantly expanding.',
   },
   {
-    question: 'Are there trading limits or restrictions?',
-    answer: 'There are no imposed trading caps or volume restrictions. Our platform is designed to serve both individual traders and institutional users without artificial limitations.',
+    question: 'Are there withdrawal limits or trading caps?',
+    answer: 'Zero. No daily limits, no monthly caps, no "verification levels" that unlock higher amounts. Move your wealth when you want, how you want. Your money, your rules.',
   },
   {
-    question: 'How is security maintained?',
-    answer: "Security is ensured through Telegram's native encryption infrastructure, combined with multi-factor authentication and our proprietary security protocols. Your assets remain secure without requiring personal data collection.",
+    question: 'How fast are transactions?',
+    answer: 'Instant. While traditional exchanges make you wait 3-7 days for verification, you can start trading in under 60 seconds. Most transactions complete within minutes, not days.',
+  },
+  {
+    question: 'What payment methods do you accept?',
+    answer: 'Bank transfers in 180+ countries, cash deposits, international wires, and most major payment systems. We work with what works for you—no restrictions based on your location or payment preference.',
   },
 ];
+
+// Extract check items to module scope to avoid recreating on every render (React Best Practice 6.3)
+const checkItemsMap = {
+  buy: ['No maximum limits', 'Easy and uncomplicated', 'Support for larger amounts'],
+  sell: ['Flexible withdrawal options', 'Smooth off-ramp process', 'Handle any amount'],
+  swap: ['All cryptocurrencies supported', 'Privacy coins included', 'Transparent pricing'],
+  coins: ['150+ digital assets', 'Regular new listings', 'No trading restrictions'],
+  nocustody: ['Never hold your funds', 'No fund locks', 'Complete transparency']
+} as const;
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -36,10 +51,10 @@ export default function FAQ() {
       <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
         <AnimatedSection>
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 text-center heading-text">
-            Frequently asked questions
+            Questions about privacy
           </h2>
           <p className="text-lg text-muted-foreground text-center mb-16 professional-text">
-            Everything you need to know about our platform
+            We answer what other exchanges won't
           </p>
         </AnimatedSection>
 

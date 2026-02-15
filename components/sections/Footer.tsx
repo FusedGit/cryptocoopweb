@@ -3,7 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Twitter, Linkedin } from 'lucide-react';
+// Direct imports to avoid barrel file (React Best Practice 2.1 - CRITICAL)
+import Twitter from 'lucide-react/dist/esm/icons/twitter';
+import Linkedin from 'lucide-react/dist/esm/icons/linkedin';
+import { AnimatedLink } from '@/components/ui/animated-link';
 
 const footerLinks: { title: string; links: { name: string; href: string }[] }[] = [
   {
@@ -27,6 +30,7 @@ const footerLinks: { title: string; links: { name: string; href: string }[] }[] 
       { name: 'About', href: '/about' },
       { name: 'Business Solutions', href: '/business' },
       { name: 'Investors', href: '/investors' },
+      { name: 'Investor Panel', href: '/investors/login' },
     ]
   }
 ];
@@ -97,12 +101,13 @@ export default function Footer() {
               <ul className="space-y-3">
                 {column.links.map((link) => (
                   <li key={link.name}>
-                    <Link 
-                      href={link.href} 
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors professional-text"
+                    <AnimatedLink 
+                      href={link.href}
+                      external={link.href.startsWith('http')}
+                      className="text-sm text-muted-foreground hover:text-foreground professional-text"
                     >
                       {link.name}
-                    </Link>
+                    </AnimatedLink>
                   </li>
                 ))}
               </ul>
@@ -113,12 +118,18 @@ export default function Footer() {
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground professional-text">
           <div>© 2026 Cryptocoop. All rights reserved.</div>
           <div className="flex gap-6">
-            <Link href="/terms" className="hover:text-foreground transition-colors">
+            <AnimatedLink 
+              href="/terms"
+              className="hover:text-foreground"
+            >
               Terms of Service
-            </Link>
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+            </AnimatedLink>
+            <AnimatedLink 
+              href="/privacy"
+              className="hover:text-foreground"
+            >
               Privacy Policy
-            </Link>
+            </AnimatedLink>
           </div>
         </div>
       </div>

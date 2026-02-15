@@ -4,16 +4,14 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 interface ROIBarProps {
-  tier: string;
-  amount: string;
+  lockDuration: string;
   roi: number;
-  returns: string;
-  isRecommended?: boolean;
+  detail: string;
   delay: number;
   isInView: boolean;
 }
 
-function ROIBar({ tier, amount, roi, returns, isRecommended, delay, isInView }: ROIBarProps) {
+function ROIBar({ lockDuration, roi, detail, delay, isInView }: ROIBarProps) {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -30,28 +28,22 @@ function ROIBar({ tier, amount, roi, returns, isRecommended, delay, isInView }: 
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, delay: delay / 1000 }}
-      className={`relative ${isRecommended ? 'bg-primary/5 border-2 border-primary/30' : 'bg-accent/20 border border-border'} p-6 rounded-lg`}
+      className="relative bg-accent/20 border border-border p-6 rounded-lg"
     >
-      {isRecommended && (
-        <div className="absolute -top-2 left-4 bg-primary px-2 py-0.5 rounded-full">
-          <span className="text-xs text-white professional-text font-medium">Recommended</span>
-        </div>
-      )}
-      
       <div className="flex items-center justify-between mb-4">
         <div>
-          <p className="text-sm text-muted-foreground professional-text mb-1">{tier}</p>
-          <p className="text-2xl text-foreground heading-text">{amount}</p>
+          <p className="text-sm text-muted-foreground professional-text mb-1">Lock Duration</p>
+          <p className="text-2xl text-foreground heading-text">{lockDuration}</p>
         </div>
         <div className="text-right">
           <p className="text-3xl text-foreground heading-text">{roi}%</p>
-          <p className="text-xs text-muted-foreground professional-text">ROI</p>
+          <p className="text-xs text-muted-foreground professional-text">Target APY</p>
         </div>
       </div>
 
       <div className="relative h-2 bg-accent/30 rounded-full overflow-hidden mb-3">
         <motion.div
-          className={isRecommended ? 'bg-primary h-full' : 'bg-foreground/60 h-full'}
+          className="bg-foreground/60 h-full"
           initial={{ width: 0 }}
           animate={{ width: `${width}%` }}
           transition={{ duration: 1.5, delay: delay / 1000 + 0.3, ease: 'easeOut' }}
@@ -59,7 +51,7 @@ function ROIBar({ tier, amount, roi, returns, isRecommended, delay, isInView }: 
       </div>
 
       <p className="text-sm text-muted-foreground professional-text">
-        1-Year Returns: <span className="font-medium text-foreground">{returns}</span>
+        {detail}
       </p>
     </motion.div>
   );
@@ -72,27 +64,23 @@ export function ROIComparison() {
   return (
     <div ref={ref} className="space-y-4">
       <ROIBar
-        tier="Tier 1"
-        amount="$200K"
+        lockDuration="12 Months"
         roi={60}
-        returns="$120K"
+        detail="Long-term lock period for highest target yield."
         delay={200}
         isInView={isInView}
       />
       <ROIBar
-        tier="Tier 2"
-        amount="$500K"
-        roi={50}
-        returns="$250K"
-        isRecommended
+        lockDuration="6 Months"
+        roi={30}
+        detail="Mid-term lock period with balanced liquidity and yield."
         delay={400}
         isInView={isInView}
       />
       <ROIBar
-        tier="Tier 3"
-        amount="$1M"
-        roi={45}
-        returns="$450K"
+        lockDuration="3 Months"
+        roi={10}
+        detail="Short-term lock period with faster capital availability."
         delay={600}
         isInView={isInView}
       />

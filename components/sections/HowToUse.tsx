@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+// Direct import to avoid barrel file (React Best Practice 2.1 - CRITICAL)
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 import Image from 'next/image';
 import AnimatedSection from '@/components/AnimatedSection';
 
@@ -8,18 +10,18 @@ export default function HowToUse() {
   const steps = [
     {
       step: '01',
-      title: 'Scan QR code',
-      description: 'Use your phone camera or Telegram to scan the QR code and launch the bot instantly.',
+      title: 'Open Telegram',
+      description: 'Search for @TheCryptoCoopBot or scan the QR code. No app downloads, no registration forms, no delays.',
     },
     {
       step: '02',
-      title: 'Or search on Telegram',
-      description: 'Find @TheCryptoCoopBot in Telegram search and start a conversation.',
+      title: 'Choose your trade',
+      description: 'Buy, sell, or swap. Select your crypto and payment method. Simple commands, instant execution.',
     },
     {
       step: '03',
-      title: 'Start trading',
-      description: 'Complete your first secure transaction directly in the chat interface.',
+      title: 'Trade privately',
+      description: 'Complete your transaction in seconds. No verification, no surveillance, no compromise. Your privacy guaranteed.',
     },
   ];
 
@@ -36,7 +38,7 @@ export default function HowToUse() {
                 viewport={{ once: true }}
                 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-6 leading-tight heading-text"
               >
-                Getting started is simple
+                Start trading in 60 seconds
               </motion.h2>
 
               <motion.p 
@@ -46,12 +48,12 @@ export default function HowToUse() {
                 transition={{ delay: 0.1 }}
                 className="text-lg text-muted-foreground mb-12 professional-text max-w-lg"
               >
-                Access a full-featured exchange directly within Telegram. 
-                No downloads, no complexity.
+                While traditional exchanges make you wait days for verification, 
+                we get you trading immediately. Zero friction, maximum privacy.
               </motion.p>
 
               {/* Steps */}
-              <div className="space-y-8">
+              <div className="space-y-8 mb-10">
                 {steps.map((step, index) => (
                   <motion.div
                     key={index}
@@ -75,6 +77,26 @@ export default function HowToUse() {
                   </motion.div>
                 ))}
               </div>
+
+              {/* CTA Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.a
+                  href="https://t.me/TheCryptoCoopBot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-foreground text-background px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center gap-2 transition-opacity hover:opacity-90 elevated-shadow"
+                >
+                  Start Trading Now
+                  <ArrowRight className="w-4 h-4" />
+                </motion.a>
+              </motion.div>
             </div>
           </AnimatedSection>
 

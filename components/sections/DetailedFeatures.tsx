@@ -7,30 +7,30 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 const features = [
   {
-    title: 'Privacy-first architecture',
-    subtitle: 'Designed for discretion',
-    description: 'Built on principles of financial privacy. No identity verification or personal data collection required.',
+    title: 'Zero surveillance',
+    subtitle: 'True financial privacy',
+    description: 'No KYC. No identity checks. No data harvesting. While traditional exchanges build dossiers on you, we build nothing. Your transactions are invisible, untraceable, and yours alone.',
     image: '/assets/camera.png',
     bg: 'bg-gradient-to-br from-accent/30 to-accent/10',
   },
   {
-    title: 'Unrestricted trading',
-    subtitle: 'No artificial limits',
-    description: 'Trade without caps or restrictions. Full access to markets regardless of volume.',
+    title: 'Unrestricted access',
+    subtitle: 'Trade without barriers',
+    description: 'No daily limits. No withdrawal caps. No arbitrary restrictions. The freedom to move your wealth when and how you choose—without permission from anyone.',
     image: '/assets/nolimits.png',
     bg: 'bg-gradient-to-br from-primary/10 to-primary/5',
   },
   {
-    title: 'Global payment support',
-    subtitle: 'Connect anywhere',
-    description: 'Bank transfers, cash, and digital payment systems accepted worldwide.',
+    title: 'Global liquidity',
+    subtitle: 'Trade anywhere, anytime',
+    description: 'Bank transfers across 180+ countries. Cash deposits worldwide. Every major payment method supported. Access the crypto market from wherever you are, however you want.',
     image: '/assets/globalpayments.png',
     bg: 'bg-gradient-to-br from-muted to-background',
   },
   {
-    title: 'Dedicated support',
-    subtitle: 'Always available',
-    description: 'Real human support, available around the clock for assistance with your trades.',
+    title: 'Human support',
+    subtitle: '24/7 expert assistance',
+    description: 'Real people, not bots. Expert traders who understand your needs. Available around the clock to ensure your trades execute flawlessly.',
     image: '/assets/human.png',
     bg: 'bg-gradient-to-br from-accent/20 to-accent/5',
   },
@@ -92,17 +92,36 @@ export default function DetailedFeatures() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <motion.a
-            href="https://t.me/TheCryptoCoopBot"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-foreground text-background px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center gap-2 transition-opacity hover:opacity-90 elevated-shadow"
-          >
-            Open Exchange
-            <ArrowRight className="w-4 h-4" />
-          </motion.a>
+          <h3 className="text-2xl md:text-3xl text-foreground mb-4 heading-text">
+            Ready to trade with real privacy?
+          </h3>
+          <p className="text-lg text-muted-foreground mb-8 professional-text max-w-2xl mx-auto">
+            Join thousands who've chosen freedom over surveillance. Start trading in under 60 seconds.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.a
+              href="https://t.me/TheCryptoCoopBot"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-foreground text-background px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center justify-center gap-2 transition-opacity hover:opacity-90 elevated-shadow"
+            >
+              Open Exchange
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+            <motion.a
+              href="https://localcoinswap.com/profile/cryptocoop"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-white border border-border text-foreground px-7 py-3.5 rounded-md text-base professional-text font-medium inline-flex items-center justify-center gap-2 transition-colors hover:bg-accent/30"
+            >
+              P2P Trading
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -47,6 +47,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Preload critical hero video for instant loading */}
+        <link rel="preload" href="/assets/02.mp4" as="video" type="video/mp4" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexMono.variable} antialiased`}
       >

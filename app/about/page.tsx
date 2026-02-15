@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { TrendingUp, Users, Globe, ExternalLink } from 'lucide-react';
+import { TrendingUp, Globe, ExternalLink } from 'lucide-react';
 import Navbar from '@/components/sections/Navbar';
 import Footer from '@/components/sections/Footer';
 
@@ -117,24 +117,14 @@ export default function AboutPage() {
               The Team
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="grid gap-6 mb-8">
               <div className="bg-card p-6 border border-border rounded-lg">
                 <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mb-4">
                   <TrendingUp className="w-5 h-5 text-foreground" strokeWidth={1.5} />
                 </div>
                 <h3 className="text-lg text-foreground heading-text mb-3">Leadership</h3>
                 <p className="text-[15px] text-muted-foreground professional-text leading-relaxed">
-                  Our founder has been involved in cryptocurrency since 2013 and alternative currencies since 2005. Prior to launching Cryptocoop in 2020, he led cooperative business and alternative currency projects in Spain and internationally, focused on building community ecosystems beyond traditional nation-state structures. He has also contributed to digital banking initiatives at the European level.
-                </p>
-              </div>
-
-              <div className="bg-card p-6 border border-border rounded-lg">
-                <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center mb-4">
-                  <Users className="w-5 h-5 text-foreground" strokeWidth={1.5} />
-                </div>
-                <h3 className="text-lg text-foreground heading-text mb-3">Development</h3>
-                <p className="text-[15px] text-muted-foreground professional-text leading-relaxed">
-                  Our senior full-stack developer brings entrepreneurial experience from multiple digital business initiatives. This combination of technical expertise and business acumen enables us to build robust, user-focused solutions.
+                  Our founders have been involved in cryptocurrency since 2013 and alternative currencies since 2005. Prior to launching Cryptocoop in 2020, they led cooperative business and alternative currency projects in Spain and internationally, focused on building community ecosystems beyond traditional nation-state structures. They have also contributed to digital banking initiatives at the European level.
                 </p>
               </div>
             </div>

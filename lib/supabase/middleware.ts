@@ -43,7 +43,6 @@ export async function updateSession(request: NextRequest) {
     !user &&
     !isPublicRoute &&
     (request.nextUrl.pathname.startsWith('/dashboard') || 
-     request.nextUrl.pathname.startsWith('/investors') ||
      request.nextUrl.pathname.startsWith('/admin'))
   ) {
     // no user, potentially respond by redirecting the user to the login page
