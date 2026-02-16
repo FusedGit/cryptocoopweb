@@ -16,7 +16,7 @@ const features = [
   {
     title: 'Unrestricted access',
     subtitle: 'Trade without barriers',
-    description: 'No daily limits. No withdrawal caps. No arbitrary restrictions. The freedom to move your wealth when and how you choose—without permission from anyone.',
+    description: 'No daily limits. No withdrawal caps. No arbitrary restrictions. The freedom to move your wealth when and how you choose, without permission from anyone.',
     image: '/assets/nolimits.png',
     bg: 'bg-gradient-to-br from-primary/10 to-primary/5',
   },

@@ -53,7 +53,7 @@ export default function FeatureHighlights() {
             Everything you need. Nothing you don't.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto professional-text">
-            While other exchanges demand your identity, track your trades, and limit your freedom—we do the opposite.
+            While other exchanges demand your identity, track your trades, and limit your freedom, we built something different.
           </p>
         </motion.div>
 

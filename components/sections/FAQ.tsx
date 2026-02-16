@@ -8,15 +8,15 @@ import AnimatedSection from '@/components/AnimatedSection';
 const faqs = [
   {
     question: 'Do you really not collect any personal data?',
-    answer: 'Absolutely none. No KYC, no passport scans, no selfies, no address verification. We have zero personal information about our users—by design. Your privacy is not a feature, it&apos;s our foundation.',
+    answer: 'Absolutely none. No KYC, no passport scans, no selfies, no address verification. We collect zero personal information about our users and that is by design. Your privacy is not a feature, it is our foundation.',
   },
   {
     question: 'How can I trust you without KYC?',
-    answer: 'The question is backwards. KYC doesn\'t protect you—it exposes you. Every exchange with your data is a data breach waiting to happen. We can\'t lose what we never collect. Our non-custodial design means we never hold your funds, so there\'s nothing to "trust" us with.',
+    answer: 'The question is backwards. KYC doesn\'t protect you, it exposes you. Every exchange with your data is a data breach waiting to happen. We can\'t lose what we never collect. Our non-custodial design means we never hold your funds, so there\'s nothing to "trust" us with.',
   },
   {
     question: 'What cryptocurrencies can I trade?',
-    answer: 'All major assets: BTC, ETH, XMR, TON, USDT, LTC, and more. We specialize in privacy coins like Monero with deep liquidity. If you need a specific coin, ask our support team—we\'re constantly expanding.',
+    answer: 'All major assets: BTC, ETH, XMR, TON, USDT, LTC, and more. We specialize in privacy coins like Monero with deep liquidity. If you need a specific coin, ask our support team. We\'re constantly expanding.',
   },
   {
     question: 'Are there withdrawal limits or trading caps?',
@@ -24,11 +24,11 @@ const faqs = [
   },
   {
     question: 'How fast are transactions?',
-    answer: 'Instant. While traditional exchanges make you wait 3-7 days for verification, you can start trading in under 60 seconds. Most transactions complete within minutes, not days.',
+    answer: 'Instant. While traditional exchanges make you wait days for verification, you can start trading in under 60 seconds. Most transactions complete within minutes, not days.',
   },
   {
     question: 'What payment methods do you accept?',
-    answer: 'Bank transfers in 180+ countries, cash deposits, international wires, and most major payment systems. We work with what works for you—no restrictions based on your location or payment preference.',
+    answer: 'Bank transfers in 180+ countries, cash deposits, international wires, and most major payment systems. We work with what works for you. No restrictions based on your location or payment preference.',
   },
 ];
 

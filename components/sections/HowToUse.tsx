@@ -47,8 +47,8 @@ export default function HowToUse() {
                 transition={{ delay: 0.1 }}
                 className="text-lg text-muted-foreground mb-12 professional-text max-w-lg"
               >
-                While traditional exchanges make you wait days for verification, 
-                we get you trading immediately. Zero friction, maximum privacy.
+                Traditional exchanges make you wait days for verification. 
+                We get you trading immediately with zero friction and maximum privacy.
               </motion.p>
 
               {/* Steps */}

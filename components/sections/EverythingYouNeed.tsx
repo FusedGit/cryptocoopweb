@@ -11,7 +11,7 @@ const features = [
     icon: TrendingUp,
     title: 'Buy Crypto',
     subtitle: 'Simple on-ramp solutions',
-    description: 'Purchase cryptocurrency without limits or restrictions. Whether you need $100 or $100,000, we facilitate smooth transactions and help move larger amounts with ease. No complications, no arbitrary caps—just straightforward access to crypto.',
+    description: 'Purchase cryptocurrency without limits or restrictions. Whether you need $100 or $100,000, we facilitate smooth transactions and help move larger amounts with ease. No complications, no arbitrary caps. Just straightforward access to crypto.',
     video: '/assets/06.mp4',
     stats: [
       { label: 'Volume limits', value: 'None' },
@@ -137,7 +137,7 @@ export default function EverythingYouNeed() {
               transition={{ delay: 0.2 }}
               className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto professional-text px-4"
             >
-              While other exchanges demand your identity, track your trades, and limit your freedom—we do the opposite.
+              While other exchanges demand your identity, track your trades, and limit your freedom, we built something different.
             </motion.p>
           </div>
         </AnimatedSection>

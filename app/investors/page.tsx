@@ -12,6 +12,7 @@ import {
   Landmark,
   Building2,
 } from 'lucide-react';
+/* useRef, useScroll, useTransform moved to MobileGrowthScroll */
 import Navbar from '@/components/sections/Navbar';
 import Footer from '@/components/sections/Footer';
 import { CapitalFlow } from '@/components/ui/CapitalFlow';
@@ -19,6 +20,7 @@ import OptimizedVideo from '@/components/ui/OptimizedVideo';
 import { SparklesText } from '@/components/ui/sparkles-text';
 import { CountUp } from '@/components/ui/CountUp';
 import { TurnoverGraph } from '@/components/ui/TurnoverGraph';
+import { MobileGrowthScroll } from '@/components/ui/MobileGrowthScroll';
 
 const executionFlow = [
   {
@@ -41,9 +43,65 @@ const executionFlow = [
   },
 ];
 
+function GrowthTrajectorySection() {
+  return (
+    <>
+      {/* Mobile: immersive fullscreen scroll experience */}
+      <MobileGrowthScroll />
+
+      {/* Desktop: standard layout */}
+      <section className="hidden md:block py-24 md:py-32">
+        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
+          >
+            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground professional-text mb-3">
+              Growth
+            </p>
+            <h2 className="text-3xl md:text-5xl heading-text text-foreground">
+              Scaling through execution
+            </h2>
+            <p className="mt-5 text-base text-muted-foreground professional-text leading-relaxed max-w-2xl mx-auto">
+              From $2M to a projected $40M in annual turnover, growth driven
+              entirely by operational expansion and compounding market presence.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <TurnoverGraph />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-8 rounded-xl border border-accent/40 bg-accent/10 p-6 text-center"
+          >
+            <p className="text-sm professional-text text-foreground">
+              2026 target:{' '}
+              <span className="heading-text text-xl">
+                $<CountUp end={40} className="heading-text" />M annual turnover
+              </span>{' '}
+              expansion driven by a major product launch currently under NDA.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 export default function InvestorsPage() {
   return (
-    <main className="min-h-screen w-full bg-background overflow-x-hidden">
+    <main className="min-h-screen w-full bg-background" style={{ overflowX: 'clip' }}>
       <Navbar />
 
       {/* ━━━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━━━ */}
@@ -51,46 +109,99 @@ export default function InvestorsPage() {
         <div className="relative z-10 container mx-auto px-6 lg:px-8">
           {/* Headline */}
           <div className="text-center max-w-5xl mx-auto">
-            <h1 className="text-[2.75rem] md:text-7xl lg:text-[5.5rem] heading-text text-foreground leading-[0.95] tracking-[-0.03em]">
-              Liquidity-backed yield
+            <motion.h1
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 0.5,
+                ease: [0, 0.2459, 0.6526, 0.9468],
+                delay: 0.1,
+              }}
+              className="text-[2.75rem] md:text-7xl lg:text-[5.5rem] heading-text text-foreground leading-[0.95] tracking-[-0.03em]"
+            >
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20,
+                  delay: 0.15,
+                }}
+                className="inline-block"
+              >
+                Liquidity-backed yield
+              </motion.span>
               <br />
-              from real trading
-            </h1>
-            <p className="mt-7 text-lg md:text-xl text-muted-foreground professional-text leading-relaxed max-w-2xl mx-auto">
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20,
+                  delay: 0.3,
+                }}
+                className="inline-block"
+              >
+                from real trading
+              </motion.span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 180,
+                damping: 22,
+                delay: 0.5,
+              }}
+              className="mt-7 text-lg md:text-xl text-muted-foreground professional-text leading-relaxed max-w-2xl mx-auto"
+            >
               Your capital powers active trading operations across global crypto
               markets — generating consistent, performance-backed returns with
               full transparency.
-            </p>
+            </motion.p>
           </div>
 
           {/* CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-10">
-            <a
-              href="https://s.craft.me/SOyTD5nduCQ9Vv"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-foreground text-background px-7 py-3.5 rounded-full professional-text font-medium hover:opacity-90 transition-opacity text-sm"
-            >
-              View Documentation
-              <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
-            </a>
-            <a
+          <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center items-center mt-10">
+            {/* View Documentation button hidden for now */}
+            <motion.a
               href="https://t.me/cryptocoop2024"
               target="_blank"
               rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 200,
+                damping: 22,
+                delay: 0.75,
+              }}
               className="inline-flex items-center gap-2 bg-card border border-border text-foreground px-7 py-3.5 rounded-full professional-text font-medium hover:bg-accent/30 transition-colors text-sm"
             >
               Speak with Team
               <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
-            </a>
+            </motion.a>
           </div>
 
           {/* Video showcase */}
-          <div className="-mt-4 mx-auto max-w-4xl">
-            <div className="relative rounded-2xl overflow-hidden mix-blend-multiply -mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              type: 'spring',
+              stiffness: 120,
+              damping: 20,
+              delay: 0.85,
+            }}
+            className="mt-2 md:-mt-4 mx-auto max-w-4xl"
+          >
+            <div className="relative rounded-2xl overflow-hidden mix-blend-multiply mb-0 md:-mb-20">
               <OptimizedVideo
                 src="/assets/12.mp4"
-                className="w-full aspect-video object-cover scale-110"
+                className="w-full aspect-video object-cover md:scale-110"
                 priority={true}
                 preload="auto"
                 autoPlay
@@ -99,7 +210,7 @@ export default function InvestorsPage() {
                 playsInline
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -237,51 +348,7 @@ export default function InvestorsPage() {
       </section>
 
       {/* ━━━━━━━━━━━━━━━━ GROWTH TRAJECTORY ━━━━━━━━━━━━━━━━ */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto px-6 lg:px-8 max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
-            <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground professional-text mb-3">
-              Growth
-            </p>
-            <h2 className="text-3xl md:text-5xl heading-text text-foreground">
-              Scaling through execution
-            </h2>
-            <p className="mt-5 text-base text-muted-foreground professional-text leading-relaxed max-w-2xl mx-auto">
-              From $2M to a projected $40M in annual turnover — growth driven
-              entirely by operational expansion and compounding market presence.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <TurnoverGraph />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-8 rounded-xl border border-accent/40 bg-accent/10 p-6 text-center"
-          >
-            <p className="text-sm professional-text text-foreground">
-              2026 target:{' '}
-              <span className="heading-text text-xl">
-                $<CountUp end={40} className="heading-text" />M annual turnover
-              </span>{' '}
-              — expansion driven by a major product launch currently under NDA.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <GrowthTrajectorySection />
 
       {/* ━━━━━━━━━━━━━━━━ INVESTOR PORTAL ━━━━━━━━━━━━━━━━ */}
       <section className="py-24 md:py-32 bg-gradient-to-b from-background via-accent/5 to-background">
@@ -504,15 +571,7 @@ export default function InvestorsPage() {
               growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mt-10">
-              <a
-                href="https://s.craft.me/SOyTD5nduCQ9Vv"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-foreground text-background px-7 py-3.5 rounded-full professional-text font-medium hover:opacity-90 transition-opacity text-sm"
-              >
-                <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
-                View Complete Documentation
-              </a>
+              {/* View Documentation button hidden for now */}
               <a
                 href="https://t.me/cryptocoop2024"
                 target="_blank"

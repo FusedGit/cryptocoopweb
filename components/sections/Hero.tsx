@@ -15,9 +15,9 @@ const availableBadge = (
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen w-full pt-32 pb-24 overflow-hidden">
+    <section className="relative min-h-screen w-full pt-24 md:pt-32 pb-24 overflow-hidden">
       {/* Full-screen Video Background */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-x-0 top-[40vh] h-[70vh] md:top-0 md:h-full md:inset-0">
         <OptimizedVideo
           src="/assets/02.mp4"
           className="w-full h-full object-cover"
@@ -28,6 +28,7 @@ export default function Hero() {
           muted
           playsInline
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background md:hidden" />
       </div>
 
       {/* Content */}
@@ -35,9 +36,10 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.05 }}
+            className="mb-5"
           >
             <div
               className={cn(
@@ -99,8 +101,8 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 leading-relaxed professional-text"
           >
-            While Binance, OKX, and others track every move—we don't. Swiss-grade privacy meets 
-            instant execution. Buy, sell, and swap with absolute anonymity.
+            Other exchanges track every move you make. We do the opposite. Swiss-grade privacy
+            meets instant execution so you can buy, sell, and swap with complete anonymity.
           </motion.p>
 
           {/* CTA Buttons */}

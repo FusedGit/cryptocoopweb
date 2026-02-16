@@ -7,33 +7,33 @@ import AnimatedSection from '@/components/AnimatedSection';
 const comparisons = [
   {
     feature: 'KYC / Identity Verification',
-    them: 'Required - passport, selfies, address proof',
-    us: 'Never - zero personal data collected',
+    them: 'Required: passport, selfies, address proof',
+    us: 'Never. Zero personal data collected',
   },
   {
     feature: 'Transaction Surveillance',
     them: 'Full monitoring and reporting to authorities',
-    us: 'Absolutely none - your business is yours',
+    us: 'Absolutely none. Your business is yours',
   },
   {
     feature: 'Account Freezes',
-    them: 'Common - funds locked without warning',
-    us: 'Impossible - non-custodial design',
+    them: 'Common. Funds locked without warning',
+    us: 'Impossible. Non-custodial design',
   },
   {
     feature: 'Withdrawal Limits',
     them: 'Daily/monthly caps based on verification level',
-    us: 'No limits - move your wealth freely',
+    us: 'No limits. Move your wealth freely',
   },
   {
     feature: 'Trading Speed',
-    them: 'Fast (after 3-7 day verification)',
-    us: 'Instant - trade in 60 seconds',
+    them: 'Fast (after 3 to 7 day verification)',
+    us: 'Instant. Trade in 60 seconds',
   },
   {
     feature: 'Data Breaches Risk',
-    them: 'High - centralized database of personal info',
-    us: 'Zero - we have no data to breach',
+    them: 'High. Centralized database of personal info',
+    us: 'Zero. We have no data to breach',
   },
 ];
 
@@ -52,7 +52,7 @@ export default function WhyDifferent() {
             Why we're nothing like Binance, OKX, or Moonpay
           </h2>
           <p className="text-lg text-background/70 max-w-3xl mx-auto professional-text">
-            Traditional exchanges were built for compliance. We were built for you.
+            Traditional exchanges prioritize compliance over their users. We put you first.
           </p>
         </motion.div>
 

@@ -638,7 +638,7 @@ export default function ExchangeIncidents() {
               </p>
               <p className="text-background/70 professional-text mb-8 max-w-2xl mx-auto">
                 We can&apos;t freeze what we don&apos;t control. Our non-custodial design means your funds 
-                are always yours. No begging, no waiting, no arbitrary decisions.
+                are always yours. No begging, no waiting, no arbitrary decisions about your money.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.a

@@ -89,8 +89,8 @@ export default function TrustSection() {
               </h3>
               <p className="text-lg text-background/80 professional-text leading-relaxed max-w-2xl mx-auto">
                 We will never ask for your identity. We will never track your transactions. 
-                We will never share your data—because we don't have it. If any other exchange 
-                made this promise, they'd be lying. We built our entire architecture around this truth.
+                We will never share your data because we simply don&apos;t collect it. If any other exchange 
+                made this promise, they&apos;d be lying. We built our entire architecture around this truth.
               </p>
             </div>
           </motion.div>
