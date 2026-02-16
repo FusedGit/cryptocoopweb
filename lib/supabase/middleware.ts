@@ -2,6 +2,15 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  const isProtectedRoute =
+    pathname.startsWith('/dashboard') || pathname.startsWith('/admin')
+
+  // Keep public pages fully independent from Supabase availability.
+  if (!isProtectedRoute) {
+    return NextResponse.next({ request })
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -31,24 +40,27 @@ export async function updateSession(request: NextRequest) {
   // supabase.auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-  // Public routes that don't require authentication
-  const publicRoutes = ['/login', '/investors/login', '/auth/callback']
-  const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))
+    // Public routes that don't require authentication
+    const publicRoutes = ['/login', '/investors/login', '/auth/callback']
+    const isPublicRoute = publicRoutes.some((route) =>
+      request.nextUrl.pathname.startsWith(route)
+    )
 
-  if (
-    !user &&
-    !isPublicRoute &&
-    (request.nextUrl.pathname.startsWith('/dashboard') || 
-     request.nextUrl.pathname.startsWith('/admin'))
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
+    if (!user && !isPublicRoute) {
+      // no user, potentially respond by redirecting the user to the login page
+      const url = request.nextUrl.clone()
+      url.pathname = '/login'
+      return NextResponse.redirect(url)
+    }
+  } catch {
+    // If Supabase is unavailable, do not fail middleware globally.
+    // Protected pages can handle auth/data errors at the page/API layer.
+    return NextResponse.next({ request })
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
