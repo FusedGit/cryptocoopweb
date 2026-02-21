@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import OptimizedVideo from '@/components/ui/OptimizedVideo';
 import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
-import { EncryptedText } from '@/components/ui/encrypted-text';
-import { PointerHighlight } from '@/components/ui/pointer-highlight';
+import { ScrambledPrivacyText } from '@/components/ui/scrambled-privacy-text';
 import { cn } from '@/lib/utils';
 
 // Hoist static badge element (React Best Practice 6.3)
@@ -36,9 +35,9 @@ export default function Hero() {
         <div className="flex flex-col items-center text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.05 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.05 }}
             className="mb-5"
           >
             <div
@@ -55,50 +54,43 @@ export default function Hero() {
 
           {/* Main Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{
+              duration: 0.5,
+              ease: [0, 0.2459, 0.6526, 0.9468],
+              delay: 0.1,
+            }}
             className="text-5xl md:text-6xl lg:text-7xl text-foreground max-w-4xl mb-8 heading-text"
           >
-            <PointerHighlight
-              containerClassName="inline-block"
-              rectangleClassName="bg-neutral-200 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
-              pointerClassName="text-blue-500"
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.15 }}
+              className="inline-block"
             >
-              <span className="relative z-10">Trade</span>
-            </PointerHighlight>{' '}
-            crypto{' '}
-            <PointerHighlight
-              containerClassName="inline-block"
-              rectangleClassName="bg-neutral-200 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
-              pointerClassName="text-green-500"
-            >
-              <span className="relative z-10">with</span>
-            </PointerHighlight>
-            out{' '}
+              Trade crypto without
+            </motion.span>
             <br className="hidden md:block" />
-            compromising your{' '}
-            <PointerHighlight
-              containerClassName="inline-block"
-              rectangleClassName="bg-neutral-200 dark:bg-neutral-700 border-neutral-300 dark:border-neutral-600"
-              pointerClassName="text-purple-500"
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 20, delay: 0.3 }}
+              className="inline-block"
             >
-              <span className="relative z-10">
-                <EncryptedText
-                  text="privacy"
-                  encryptedClassName="text-neutral-500"
-                  revealedClassName="dark:text-white text-black"
-                  revealDelayMs={100}
-                />
-              </span>
-            </PointerHighlight>
+              compromising your{' '}
+              <ScrambledPrivacyText
+                text="privacy"
+                className="text-foreground"
+              />
+            </motion.span>
           </motion.h1>
 
           {/* Subheading */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ type: 'spring', stiffness: 180, damping: 22, delay: 0.5 }}
             className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12 leading-relaxed professional-text"
           >
             Other exchanges track every move you make. We do the opposite. Swiss-grade privacy
@@ -107,9 +99,9 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 22, delay: 0.7 }}
             className="flex flex-col sm:flex-row gap-4 mb-20"
           >
             <motion.a
